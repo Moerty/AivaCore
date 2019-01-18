@@ -1,0 +1,14 @@
+image: microsoft/dotnet:3.0-sdk
+
+stages:
+ - build
+ 
+before_script:
+ - "dotnet restore"
+ 
+build:
+ stage: build
+ script:
+  - "dotnet build"
+ tags:
+  - dotnet
