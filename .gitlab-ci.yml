@@ -1,14 +1,33 @@
 image: microsoft/dotnet:3.0-sdk
 
 stages:
- - build
+ - build-core
+ - build-models
+ - build-extensions
  
 before_script:
  - "dotnet restore"
  
-build:
+build-core:
  stage: build
  script:
+  - "cd Aiva.Core"
+  - "dotnet build"
+ tags:
+  - dotnet
+
+build-models:
+ stage: build
+ script:
+  - "cd Aiva.Models"
+  - "dotnet build"
+ tags:
+  - dotnet
+  
+build-extensions:
+ stage: build
+ script:
+  - "cd Aiva.Extensions"
   - "dotnet build"
  tags:
   - dotnet
