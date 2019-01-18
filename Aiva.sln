@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aiva.Gui", "Aiva.Gui\Aiva.G
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aiva.Core", "Aiva.Core\Aiva.Core.csproj", "{01F3A593-A3B7-4E4A-BBE3-57AD67A29865}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aiva.Extensions", "Aiva.Extensions\Aiva.Extensions.csproj", "{3562BA9B-54B7-47C7-B09D-BA0F07BD8C31}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aiva.Extensions", "Aiva.Extensions\Aiva.Extensions.csproj", "{3562BA9B-54B7-47C7-B09D-BA0F07BD8C31}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aiva.Models", "Aiva.Models\Aiva.Models.csproj", "{876BE0B5-FC82-44A7-8F33-94DE1B10DCE6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aiva.Models", "Aiva.Models\Aiva.Models.csproj", "{876BE0B5-FC82-44A7-8F33-94DE1B10DCE6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aiva.Console", "Aiva.Console\Aiva.Console.csproj", "{C48213A0-55A9-44B6-AFB0-49C4D9487DC4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{876BE0B5-FC82-44A7-8F33-94DE1B10DCE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{876BE0B5-FC82-44A7-8F33-94DE1B10DCE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{876BE0B5-FC82-44A7-8F33-94DE1B10DCE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C48213A0-55A9-44B6-AFB0-49C4D9487DC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C48213A0-55A9-44B6-AFB0-49C4D9487DC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C48213A0-55A9-44B6-AFB0-49C4D9487DC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C48213A0-55A9-44B6-AFB0-49C4D9487DC4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

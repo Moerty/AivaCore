@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <LangVersion>7.3</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Aiva.Core\Aiva.Core.csproj" />
+    <ProjectReference Include="..\Aiva.Extensions\Aiva.Extensions.csproj" />
+    <ProjectReference Include="..\Aiva.Models\Aiva.Models.csproj" />
+  </ItemGroup>
+
+</Project>

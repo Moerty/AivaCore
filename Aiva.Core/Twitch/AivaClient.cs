@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using TwitchLib.Api;
 using TwitchLib.Client;
+using TwitchLib.Client.Events;
+using TwitchLib.Client.Models;
 
 namespace Aiva.Core.Twitch {
     public class AivaClient {
@@ -15,6 +18,37 @@ namespace Aiva.Core.Twitch {
             TwitchApi = new TwitchAPI();
             TwitchApi.Settings.ClientId = Config.ConfigHandler.Config.Credentials.TwitchClientID;
             TwitchApi.Settings.AccessToken = Config.ConfigHandler.Config.Credentials.TwitchOAuth;
+
+            var credentials = new ConnectionCredentials(
+                Config.ConfigHandler.Config.General.BotName,
+                Config.ConfigHandler.Config.Credentials.TwitchOAuth);
+
+            TwitchClient = new TwitchClient();
+            TwitchClient.Initialize(
+                credentials: credentials,
+                channel: Config.ConfigHandler.Config.General.Channel,
+                chatCommandIdentifier: Convert.ToChar(Config.ConfigHandler.Config.General.CommandIdentifier),
+                whisperCommandIdentifier: '@',
+                autoReListenOnExceptions: true);
+
+            TwitchClient.OnJoinedChannel += OnJoinedChannel;
+
+            TwitchClient.Connect();
+        }
+
+        private void OnJoinedChannel(object sender, OnJoinedChannelArgs e) {
+            TwitchClient.SendMessage(
+                Config.ConfigHandler.Config.General.Channel,
+                "Aiva started, hi at all!",
+                DryRun);
+        }
+
+        public async static Task<bool> CheckBotuser(string clientId, string oauthToken) {
+            var apiClient = new TwitchAPI();
+            apiClient.Settings.AccessToken = oauthToken;
+
+            var cred = await apiClient.V5.Root.CheckCredentialsAsync();
+            return cred?.Result ?? false;
         }
     }
 }

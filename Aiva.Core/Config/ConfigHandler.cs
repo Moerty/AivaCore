@@ -8,7 +8,7 @@ namespace Aiva.Core.Config {
     public class ConfigHandler {
         public static Models.Config.Model.Root Config { get; private set; }
 
-        public ConfigHandler() {
+        public ConfigHandler(string clientId = "", string oauthToken = "", string botName = "", string channel = "") {
             if(File.Exists(GetConfigPath())) {
                 Config = Models.Config.Model.Root.FromJson(
                     File.ReadAllText(GetConfigPath()));
@@ -17,6 +17,13 @@ namespace Aiva.Core.Config {
 
                 Config = Models.Config.Model.Root.FromJson(
                     File.ReadAllText(GetConfigPath()));
+
+                Config.General.BotName = botName;
+                Config.General.Channel = channel;
+                Config.Credentials.TwitchClientID = clientId;
+                Config.Credentials.TwitchOAuth = oauthToken;
+
+                SaveConfig();
             }
         }
 
@@ -24,7 +31,7 @@ namespace Aiva.Core.Config {
         /// Move default config file to "real" file
         /// </summary>
         private void LoadDefaultConfigFile()
-            => File.Move(GetSampleConfigPath(), GetConfigPath());
+            => File.Copy(GetSampleConfigPath(), GetConfigPath());
 
         /// <summary>
         /// Save config to disc

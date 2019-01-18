@@ -16,4 +16,10 @@
     <ProjectReference Include="..\Aiva.Models\Aiva.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Config\config.json.default">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
