@@ -4,6 +4,7 @@ stages:
  - build-core
  - build-models
  - build-extensions
+ - build-console
  
 before_script:
  - "dotnet restore"
@@ -28,6 +29,14 @@ build-extensions:
  stage: build-extensions
  script:
   - "cd Aiva.Extensions"
+  - "dotnet build"
+ tags:
+  - dotnet
+  
+build-console:
+ stage: build-console
+ script:
+  - "cd Aiva.Console"
   - "dotnet build"
  tags:
   - dotnet
