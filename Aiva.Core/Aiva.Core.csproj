@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="microsoft.data.sqlite" Version="2.2.1" />
+    <PackageReference Include="microsoft.data.sqlite.core" Version="2.2.1" />
+    <PackageReference Include="microsoft.entityframeworkcore" Version="2.2.1" />
+    <PackageReference Include="microsoft.entityframeworkcore.sqlite" Version="2.2.1" />
+    <PackageReference Include="Twitchlib" Version="3.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Aiva.Models\Aiva.Models.csproj" />
+  </ItemGroup>
+
+</Project>
