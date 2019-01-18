@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Aiva.Core.Database.Functions {
-    internal class Currency {
+    public class Currency {
         #region Models
         public AddCurrency Add;
         public RemoveCurrency Remove;
@@ -26,20 +26,24 @@ namespace Aiva.Core.Database.Functions {
             /// Add list of Users Currency
             /// </summary>
             /// <param name="UserList">todo: describe UserList parameter on AddCurrencyToUserList</param>
-            public async void Add(List<Tuple<string, string, int>> UserList) {
-                using (var context = new Context()) {
-                    foreach (var user in UserList) {
-                        var userDb = await context.Users
-                            .SingleOrDefaultAsync(u => u.UsersId == user.Item2)
-                            .ConfigureAwait(false);
+            public async Task Add(List<Tuple<string, string, int>> UserList) {
+                if (UserList?.Count > 0) {
+                    using (var context = new Context()) {
+                        foreach (var user in UserList) {
+                            if (!string.IsNullOrEmpty(user.Item1) && !string.IsNullOrEmpty(user.Item2)) {
+                                var userDb = await context.Users
+                                    .SingleOrDefaultAsync(u => u.UsersId == user.Item2)
+                                    .ConfigureAwait(false);
 
-                        if (userDb != null) {
-                            userDb.Currency.Value += user.Item3;
+                                if (userDb != null) {
+                                    userDb.Currency.Value += user.Item3;
+                                }
+                            }
                         }
-                    }
 
-                    await context.SaveChangesAsync()
-                        .ConfigureAwait(false);
+                        await context.SaveChangesAsync()
+                            .ConfigureAwait(false);
+                    }
                 }
             }
 
@@ -66,7 +70,7 @@ namespace Aiva.Core.Database.Functions {
             /// <summary>
             /// Add currency to active viewers
             /// </summary>
-            public async void AddCurrencyActiveViewer() {
+            public async Task AddCurrencyActiveViewer() {
                 using (var context = new Context()) {
                     var activeUsers = await context.ActiveUsers
                         .ToListAsync()
@@ -115,7 +119,7 @@ namespace Aiva.Core.Database.Functions {
             /// Remove list of Users Currency
             /// </summary>
             /// <param name="UserList"></param>
-            public async void Remove(List<Tuple<string, string, int>> UserList) {
+            public async Task Remove(List<Tuple<string, string, int>> UserList) {
                 using (var context = new Context()) {
                     foreach (var user in UserList) {
                         var userDb = await context.Users
@@ -221,7 +225,7 @@ namespace Aiva.Core.Database.Functions {
         /// Add User to Table Currency
         /// </summary>
         /// <param name="twitchID"></param>
-        public async void AddUserToCurrencyTable(string twitchID) {
+        public async Task AddUserToCurrencyTable(string twitchID) {
             using (var context = new Context()) {
                 var currencyEntry = await context.Currency
                     .SingleOrDefaultAsync(c => c.UsersId == twitchID)

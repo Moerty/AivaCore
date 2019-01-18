@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using TwitchLib.Client.Events;
 
 namespace Aiva.Core.Database.Functions {
@@ -11,7 +12,7 @@ namespace Aiva.Core.Database.Functions {
             _databaseAddHandler = new Users.Add();
         }
 
-        internal async void AddReceivedMessageToDatabase(object sender, OnMessageReceivedArgs e) {
+        internal async Task AddReceivedMessageToDatabase(OnMessageReceivedArgs e) {
             // add user to database if not exist
             // cause irc "join" message needs time
             await _databaseAddHandler.AddUserToDatabaseAsync(e.ChatMessage);

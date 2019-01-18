@@ -83,7 +83,7 @@ namespace Aiva.Core.Database.Functions {
                 }
             }
 
-            internal async void UserJoined(object sender, OnUserJoinedArgs e) {
+            internal async Task UserJoined(OnUserJoinedArgs e) {
                 var twitchUser = await Twitch.AivaClient.TwitchApi.V5.Users.GetUserByNameAsync(e.Username)
                         .ConfigureAwait(false);
 
@@ -92,7 +92,7 @@ namespace Aiva.Core.Database.Functions {
                 }
             }
 
-            internal async void AddExistingUsers(object sender, OnExistingUsersDetectedArgs e) {
+            internal async Task AddExistingUsers(OnExistingUsersDetectedArgs e) {
                 foreach(var user in e.Users) {
                     var twitchUser = await Twitch.AivaClient.TwitchApi.V5.Users.GetUserByNameAsync(user)
                         .ConfigureAwait(false);
@@ -142,7 +142,7 @@ namespace Aiva.Core.Database.Functions {
         }
 
         internal class Remove {
-            internal async void UserLeft(object sender, OnUserLeftArgs e) {
+            internal async Task UserLeft(OnUserLeftArgs e) {
                 var twitchUser = await Twitch.AivaClient.TwitchApi.V5.Users.GetUserByNameAsync(e.Username)
                         .ConfigureAwait(false);
 

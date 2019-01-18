@@ -19,12 +19,12 @@ namespace Aiva.Core.Twitch.Functions {
 
         public void SetEvents() {
             // users
-            AivaClient.TwitchClient.OnExistingUsersDetected += _databaseUsersHandler.AddUser.AddExistingUsers;
-            AivaClient.TwitchClient.OnUserJoined += _databaseUsersHandler.AddUser.UserJoined;
-            AivaClient.TwitchClient.OnUserLeft += _databaseUsersHandler.RemoveUser.UserLeft;
+            AivaClient.TwitchClient.OnExistingUsersDetected += async (s,e) => await _databaseUsersHandler.AddUser.AddExistingUsers(e);
+            AivaClient.TwitchClient.OnUserJoined += async (s, e) => await _databaseUsersHandler.AddUser.UserJoined(e);
+            AivaClient.TwitchClient.OnUserLeft += async (s, e) => await _databaseUsersHandler.RemoveUser.UserLeft(e);
 
             // chat
-            AivaClient.TwitchClient.OnMessageReceived += _chatDatabaseHandler.AddReceivedMessageToDatabase;
+            AivaClient.TwitchClient.OnMessageReceived += async (s, e) => await _chatDatabaseHandler.AddReceivedMessageToDatabase(e);
 
             // currency
             AivaClient.TwitchClient.OnChatCommandReceived += _currencyCommandHandler.OnChatCommandReceived;
