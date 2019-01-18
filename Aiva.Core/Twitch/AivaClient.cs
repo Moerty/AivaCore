@@ -9,7 +9,7 @@ using TwitchLib.Client.Models;
 
 namespace Aiva.Core.Twitch {
     public class AivaClient {
-        public bool DryRun = false;
+        public static bool DryRun = false;
 
         public static TwitchClient TwitchClient { get; private set; }
         public static TwitchAPI TwitchApi { get; private set; }

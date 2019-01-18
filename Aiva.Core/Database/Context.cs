@@ -34,17 +34,24 @@ namespace Aiva.Core.Database {
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Users>()
-                .HasKey(k => k.UsersId);
+            modelBuilder.Entity<Chat>()
+                .Property(f => f.Id)
+                .ValueGeneratedOnAdd();
 
-            modelBuilder.Entity<ActiveUsers>().HasKey(k => k.TwitchUserId);
-            modelBuilder.Entity<BlacklistedWords>().HasKey(k => k.BlacklistedWordsId);
+            modelBuilder.Entity<Chat>()
+                .HasKey(k => k.Id);
 
-            modelBuilder.Entity<Chat>().HasKey(k => k.ChatId);
+            //modelBuilder.Entity<Users>()
+            //    .HasKey(k => k.UsersId);
 
-            modelBuilder.Entity<Commands>().HasKey(k => k.CommandsId);
-            modelBuilder.Entity<Timers>().HasKey(k => k.TimersId);
-            modelBuilder.Entity<ViewerStatistics>().HasKey(k => k.Id);
+            //modelBuilder.Entity<ActiveUsers>().HasKey(k => k.Id);
+            //modelBuilder.Entity<BlacklistedWords>().HasKey(k => k.Id);
+
+            //modelBuilder.Entity<Chat>().HasKey(k => k.Id);
+
+            //modelBuilder.Entity<Commands>().HasKey(k => k.Id);
+            //modelBuilder.Entity<Timers>().HasKey(k => k.Id);
+            //modelBuilder.Entity<ViewerStatistics>().HasKey(k => k.Id);
         }
     }
 }

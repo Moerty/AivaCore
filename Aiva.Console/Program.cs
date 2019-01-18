@@ -14,7 +14,7 @@ namespace Aiva.Console {
                     clientId = System.Console.ReadLine();
                 } while (string.IsNullOrEmpty(clientId));
 
-
+                
 
                 var auth = new Core.Twitch.Authentication();
                 auth.SendRequestToBrowser(clientId);
@@ -33,7 +33,7 @@ namespace Aiva.Console {
             Core.Boot.Main();
 
             System.Console.WriteLine("Press crtl + c to quit");
-            while (System.Console.ReadKey() != new ConsoleKeyInfo('c', ConsoleKey.C, false, false, true));
+            while (System.Console.ReadKey() == new ConsoleKeyInfo('c', ConsoleKey.C, false, false, true));
         }
     }
 }

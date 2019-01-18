@@ -8,6 +8,8 @@ namespace Aiva.Core {
             CheckIfDatabaseExists();
             var config = new Config.ConfigHandler();
             var twitchClient = new Twitch.AivaClient();
+            var twitchTasks = new Twitch.Functions.EventListener();
+            twitchTasks.SetEvents();
         }
 
         private static void CheckIfDatabaseExists() {

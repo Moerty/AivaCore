@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Aiva.Models.Database {
     public class Users {
-        public int UsersId { get; set; }
-
+        [Key]
+        public string UsersId { get; set; }
         public string DisplayName { get; set; }
         public string Name { get; set; }
         public string Type { get; set; }
