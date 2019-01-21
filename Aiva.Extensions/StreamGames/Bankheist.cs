@@ -1,4 +1,6 @@
 ﻿using Aiva.Core.Twitch;
+using Aiva.Models.Enums;
+using Aiva.Models.StreamGames.Bankheist;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -56,18 +58,18 @@ namespace Aiva.Extensions.StreamGames {
         private void StartBankheistEndTimer() {
             _bankheistEndTimer = new System.Timers.Timer {
                 AutoReset = false,
-                Interval = TimeSpan.FromMinutes(Config.Instance.Storage.StreamGames.Bankheist.Cooldowns.BankheistDuration).TotalMilliseconds
+                Interval = TimeSpan.FromMinutes(Core.Config.ConfigHandler.Config.StreamGames.Bankheist.Cooldowns.BankheistDuration).TotalMilliseconds
             };
             _bankheistEndTimer.Elapsed += (sender, ElapsedEventArgs) => StopBankheist();
             _bankheistEndTimer.Start();
         }
 
-        private void StopBankheist() {
-            _nextStartAfterCooldown = DateTime.Now.AddMinutes(Config.Instance.Storage.StreamGames.Bankheist.Cooldowns.BankheistCooldown);
+        private async void StopBankheist() {
+            _nextStartAfterCooldown = DateTime.Now.AddMinutes(Core.Config.ConfigHandler.Config.StreamGames.Bankheist.Cooldowns.BankheistCooldown);
             var bank = IdentifyBank();
             var winningDetailsForBank = GetWinningDetailsForBank(bank);
 
-            var Winners = new List<Models.Streamgames.Bankheist.UserBetModel>();
+            var Winners = new List<UserBetModel>();
 
             foreach (var user in _userList) {
                 if (IsUserWinner(winningDetailsForBank.Item1)) {
@@ -76,8 +78,10 @@ namespace Aiva.Extensions.StreamGames {
                 }
             }
 
-            if (Winners.Count > 0) {
-                Winners.ForEach(u => _databaseCurrencyHandler.Add.Add(u.TwitchID, u.Bet));
+            if(Winners.Count > 0) {
+                foreach(var winner in Winners) {
+                    await _databaseCurrencyHandler.Add.Add(winner.TwitchID, winner.Bet);
+                }
             }
 
             WriteWinnersInChat(Winners);
@@ -87,8 +91,8 @@ namespace Aiva.Extensions.StreamGames {
             var sb = new StringBuilder();
             sb.Append("Winners: ");
             winners.ForEach(w => sb.Append(w.Name).Append("|"));
-            AivaClient.Instance.TwitchClient.SendMessage(
-                channel: AivaClient.Instance.Channel,
+            AivaClient.TwitchClient.SendMessage(
+                channel: Core.Config.ConfigHandler.Config.General.Channel,
                 message: sb.ToString().TrimEnd('|'),
                 dryRun: AivaClient.DryRun);
         }
@@ -97,50 +101,50 @@ namespace Aiva.Extensions.StreamGames {
             return new Random().Next(100) <= item1;
         }
 
-        private Tuple<long, double> GetWinningDetailsForBank(Bank bank) {
+        private Tuple<long, double> GetWinningDetailsForBank(Banks bank) {
             switch (bank) {
-                case Bank.Bank5:
+                case Banks.Bank5:
                     return new Tuple<long, double>(
-                        Config.Instance.Storage.StreamGames.Bankheist.Settings.Bank5.SuccessRate,
-                        Config.Instance.Storage.StreamGames.Bankheist.Settings.Bank5.WinningMultiplier);
-                case Bank.Bank4:
+                        Core.Config.ConfigHandler.Config.StreamGames.Bankheist.Settings.Bank5.SuccessRate,
+                        Core.Config.ConfigHandler.Config.StreamGames.Bankheist.Settings.Bank5.WinningMultiplier);
+                case Banks.Bank4:
                     return new Tuple<long, double>(
-                        Config.Instance.Storage.StreamGames.Bankheist.Settings.Bank4.SuccessRate,
-                        Config.Instance.Storage.StreamGames.Bankheist.Settings.Bank4.WinningMultiplier);
-                case Bank.Bank3:
+                        Core.Config.ConfigHandler.Config.StreamGames.Bankheist.Settings.Bank4.SuccessRate,
+                        Core.Config.ConfigHandler.Config.StreamGames.Bankheist.Settings.Bank4.WinningMultiplier);
+                case Banks.Bank3:
                     return new Tuple<long, double>(
-                        Config.Instance.Storage.StreamGames.Bankheist.Settings.Bank3.SuccessRate,
-                        Config.Instance.Storage.StreamGames.Bankheist.Settings.Bank3.WinningMultiplier);
-                case Bank.Bank2:
+                        Core.Config.ConfigHandler.Config.StreamGames.Bankheist.Settings.Bank3.SuccessRate,
+                        Core.Config.ConfigHandler.Config.StreamGames.Bankheist.Settings.Bank3.WinningMultiplier);
+                case Banks.Bank2:
                     return new Tuple<long, double>(
-                        Config.Instance.Storage.StreamGames.Bankheist.Settings.Bank2.SuccessRate,
-                        Config.Instance.Storage.StreamGames.Bankheist.Settings.Bank2.WinningMultiplier);
+                        Core.Config.ConfigHandler.Config.StreamGames.Bankheist.Settings.Bank2.SuccessRate,
+                        Core.Config.ConfigHandler.Config.StreamGames.Bankheist.Settings.Bank2.WinningMultiplier);
                 default: // bank 1
                     return new Tuple<long, double>(
-                        Config.Instance.Storage.StreamGames.Bankheist.Settings.Bank1.SuccessRate,
-                        Config.Instance.Storage.StreamGames.Bankheist.Settings.Bank1.WinningMultiplier);
+                        Core.Config.ConfigHandler.Config.StreamGames.Bankheist.Settings.Bank1.SuccessRate,
+                        Core.Config.ConfigHandler.Config.StreamGames.Bankheist.Settings.Bank1.WinningMultiplier);
             }
         }
 
-        private Models.Enums.Bank IdentifyBank() {
+        private Banks IdentifyBank() {
             var count = _userList.Count;
 
-            if (count >= Config.Instance.Storage.StreamGames.Bankheist.Settings.Bank5.MinimumPlayers) {
-                return Models.Enums.Bank.Bank5;
-            } else if (count >= Config.Instance.Storage.StreamGames.Bankheist.Settings.Bank4.MinimumPlayers) {
-                return Models.Enums.Bank.Bank4;
-            } else if (count >= Config.Instance.Storage.StreamGames.Bankheist.Settings.Bank3.MinimumPlayers) {
-                return Models.Enums.Bank.Bank3;
-            } else if (count >= Config.Instance.Storage.StreamGames.Bankheist.Settings.Bank2.MinimumPlayers) {
-                return Models.Enums.Bank.Bank2;
+            if (count >= Core.Config.ConfigHandler.Config.StreamGames.Bankheist.Settings.Bank5.MinimumPlayers) {
+                return Banks.Bank5;
+            } else if (count >= Core.Config.ConfigHandler.Config.StreamGames.Bankheist.Settings.Bank4.MinimumPlayers) {
+                return Banks.Bank4;
+            } else if (count >= Core.Config.ConfigHandler.Config.StreamGames.Bankheist.Settings.Bank3.MinimumPlayers) {
+                return Banks.Bank3;
+            } else if (count >= Core.Config.ConfigHandler.Config.StreamGames.Bankheist.Settings.Bank2.MinimumPlayers) {
+                return Banks.Bank2;
             } else {
-                return Models.Enums.Bank.Bank1;
+                return Banks.Bank1;
             }
         }
 
-        private void AddUserToList(int userId, int bankheistBet, string displayName) {
+        private void AddUserToList(string userId, int bankheistBet, string displayName) {
             _userList.Add(
-                new Models.Streamgames.Bankheist.UserBetModel {
+                new Models.StreamGames.Bankheist.UserBetModel {
                     Name = displayName,
                     TwitchID = userId,
                     Bet = bankheistBet
@@ -148,9 +152,9 @@ namespace Aiva.Extensions.StreamGames {
         }
 
         private void WriteBankheistStartupInChat() {
-            AivaClient.Instance.TwitchClient.SendMessage(
-                channel: AivaClient.Instance.Channel,
-                message: $"New Bankheist started! Write !{Config.Instance.Storage.StreamGames.Bankheist.General.Command} in the Chat to rob the bank!",
+            AivaClient.TwitchClient.SendMessage(
+                channel: Core.Config.ConfigHandler.Config.General.Channel,
+                message: $"New Bankheist started! Write !{Core.Config.ConfigHandler.Config.StreamGames.Bankheist.General.Command} in the Chat to rob the bank!",
                 dryRun: AivaClient.DryRun);
         }
     }
