@@ -1,11 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
     <PropertyGroup>
-        <OutputType>WinExe</OutputType>
+        <OutputType>Exe</OutputType>
         <TargetFramework>netcoreapp3.0</TargetFramework>
         <UseWPF>true</UseWPF>
         <AssemblyName>Aiva.Gui</AssemblyName>
         <RootNamespace>Aiva.Gui</RootNamespace>
+		<RuntimeIdentifiers>
+		<RuntimeIdentifiers>win10-x64</RuntimeIdentifiers>
+	</RuntimeIdentifiers>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+      <OutputPath></OutputPath>
     </PropertyGroup>
 
     <ItemGroup>
@@ -30,5 +37,6 @@
             <DesignTimeBuild>true</DesignTimeBuild>
         </PropertyGroup>
     </Target>
+
 
 </Project>
