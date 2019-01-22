@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MahApps.Metro.Controls;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -15,9 +16,10 @@ namespace Aiva.Gui.Views.Tabs {
     /// <summary>
     /// Interaktionslogik für Console.xaml
     /// </summary>
-    public partial class Console : UserControl {
+    public partial class Console : MetroContentControl {
         public Console() {
             InitializeComponent();
+            this.DataContext = new ViewModels.Tabs.ConsoleViewModel();
         }
     }
 }

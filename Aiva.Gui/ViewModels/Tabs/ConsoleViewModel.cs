@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using Aiva.Gui.Internal;
 
 namespace Aiva.Gui.ViewModels.Tabs {
     [PropertyChanged.AddINotifyPropertyChangedInterface]
     public class ConsoleViewModel {
-        public ObservableCollection<string> Message { get; set; }
-        public ObservableCollection<string> User { get; set; }
+        public AsyncObservableCollection<string> Message { get; set; }
+        public AsyncObservableCollection<string> User { get; set; }
 
         public ConsoleViewModel() {
-            Message = new ObservableCollection<string>();
-            User = new ObservableCollection<string>();
+            Message = new AsyncObservableCollection<string>();
+            User = new AsyncObservableCollection<string>();
             Core.Twitch.AivaClient.TwitchClient.OnMessageReceived
                 += (s, e)
                 => {
