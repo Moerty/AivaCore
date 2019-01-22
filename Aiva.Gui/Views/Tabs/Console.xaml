@@ -23,11 +23,19 @@
         <ItemsControl ItemsSource="{Binding Message}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <ItemsControl ItemsSource="{Binding Badges}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <ItemsControl Grid.Column="0" ItemsSource="{Binding Badges}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
-                                    <StackPanel Orientation="Horizontal" />
+                                    <Grid />
                                 </ItemsPanelTemplate>
                             </ItemsControl.ItemsPanel>
 
@@ -41,78 +49,34 @@
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
-                        <!--<ItemsControl DockPanel.Dock="Left" ItemsSource="{Binding Badges}">
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <Image
-                                        Width="18"
-                                        Height="18"
-                                        Margin="5"
-                                        Source="{Binding ., Converter={StaticResource badgeConverter}}" />
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>-->
-
-                        <Separator />
-                        <TextBlock Text="{Binding Username}" />
-                        <Separator />
-                        <TextBlock Text="{Binding Message}" />
-                    </StackPanel>
+                        <TextBlock
+                            Grid.Column="1"
+                            VerticalAlignment="Center"
+                            FontSize="15"
+                            FontWeight="Bold"
+                            Text=" | " />
+                        <TextBlock
+                            Grid.Column="2"
+                            VerticalAlignment="Center"
+                            FontSize="15"
+                            FontWeight="Bold"
+                            Text="{Binding Username}" />
+                        <TextBlock
+                            Grid.Column="3"
+                            VerticalAlignment="Center"
+                            FontSize="15"
+                            FontWeight="Bold"
+                            Text=" | " />
+                        <TextBlock
+                            Grid.Column="4"
+                            VerticalAlignment="Center"
+                            FontSize="15"
+                            Text="{Binding Message}"
+                            TextWrapping="Wrap" />
+                    </Grid>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
-
-        <!--<ScrollViewer
-            Grid.Column="0"
-            Padding="4"
-            internal:ScrollViewerExtension.AutoScroll="True"
-            HorizontalScrollBarVisibility="Disabled">
-            <ItemsControl ItemsSource="{Binding Message}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <ItemsControl ItemsSource="{Binding Badges}">
-                                <Image Margin="5" Source="{Binding ., Converter={StaticResource badgeConverter}}" />
-                            </ItemsControl>
-                            <TextBlock TextWrapping="WrapWithOverflow">
-                                <Run
-                                    FontWeight="Bold"
-                                    Foreground="{Binding Color}"
-                                    Text="{Binding User, StringFormat={}{0}:}" />
-                                <Run Text="{Binding Message}" />
-                            </TextBlock>
-                        </StackPanel>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </ScrollViewer>-->
-        <!--<ItemsControl ItemsSource="{Binding Message}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock TextWrapping="Wrap">
-                            <StackPanel Orientation="Horizontal">
-                                <ItemsControl ItemsSource="{Binding Badges}">
-                                    <ItemsControl.ItemTemplate>
-                                        <DataTemplate>
-                                            <Image Margin="5" Source="{Binding ., Converter={StaticResource badgeConverter}}" />
-                                        </DataTemplate>
-                                    </ItemsControl.ItemTemplate>
-                                </ItemsControl>
-                                <Separator />
-                                <TextBlock Text="{Binding Username}" />
-                                <Separator />
-                                <TextBlock Text="{Binding Message}" />
-                            </StackPanel>
-                        </TextBlock>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-                <ItemsControl.ContextMenu>
-                    <ContextMenu Name="MessagesContextMenu">
-                        <MenuItem Header="TODO: Copy Message" />
-                        <MenuItem Header="TODO: Copy Twitch Username" />
-                    </ContextMenu>
-                </ItemsControl.ContextMenu>
-            </ItemsControl>-->
         <ListBox
             Grid.Column="1"
             Height="300"
