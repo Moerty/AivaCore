@@ -2,6 +2,7 @@
     x:Class="Aiva.Gui.Views.Tabs.Console"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:clr="clr-namespace:System;assembly=mscorlib"
     xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:converters="clr-namespace:Aiva.Gui.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -13,6 +14,18 @@
     mc:Ignorable="d">
     <controls:MetroContentControl.Resources>
         <converters:BadgeConverter x:Key="badgeConverter" />
+
+        <CollectionViewSource
+            x:Key="cvsViewers"
+            IsLiveGroupingRequested="True"
+            Source="{Binding User}">
+            <CollectionViewSource.LiveGroupingProperties>
+                <clr:String>UserType</clr:String>
+            </CollectionViewSource.LiveGroupingProperties>
+            <CollectionViewSource.GroupDescriptions>
+                <PropertyGroupDescription PropertyName="UserType" />
+            </CollectionViewSource.GroupDescriptions>
+        </CollectionViewSource>
     </controls:MetroContentControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -77,9 +90,52 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
-        <ListBox
+
+        <ListView
+            Name="lvUsers"
             Grid.Column="1"
-            Height="300"
-            ItemsSource="{Binding User}" />
+            ItemsSource="{Binding Source={StaticResource cvsViewers}}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock
+                        Margin="10,0,0,0"
+                        VerticalAlignment="Center"
+                        FontWeight="Bold"
+                        Text="{Binding Path=Username}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.ContainerStyle>
+                        <Style TargetType="{x:Type GroupItem}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <Expander
+                                            Background="Transparent"
+                                            BorderThickness="0"
+                                            DataContext="{Binding Items}"
+                                            Foreground="Transparent"
+                                            IsExpanded="True">
+                                            <Expander.Header>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock
+                                                        VerticalAlignment="Top"
+                                                        FontSize="22"
+                                                        FontWeight="Bold"
+                                                        Foreground="Gray"
+                                                        Text="{Binding Path=UserType}" />
+                                                </StackPanel>
+                                            </Expander.Header>
+                                            <ItemsPresenter />
+                                        </Expander>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </GroupStyle.ContainerStyle>
+                </GroupStyle>
+            </ListView.GroupStyle>
+        </ListView>
     </Grid>
 </controls:MetroContentControl>
