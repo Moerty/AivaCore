@@ -8,7 +8,7 @@ using System.Text;
 using TwitchLib.Client.Events;
 
 namespace Aiva.Extensions.StreamGames {
-    internal class Bankheist {
+    public class Bankheist : Models.Interfaces.IStreamGames {
         private DateTime _nextStartAfterCooldown;
         private List<Models.StreamGames.Bankheist.UserBetModel> _userList;
         private readonly Core.Database.Functions.Currency _databaseCurrencyHandler;
@@ -16,9 +16,6 @@ namespace Aiva.Extensions.StreamGames {
 
         public Bankheist() {
             _databaseCurrencyHandler = new Core.Database.Functions.Currency();
-            if (Core.Config.ConfigHandler.Config.StreamGames.Bankheist.General.Active) {
-                AivaClient.TwitchClient.OnChatCommandReceived += ChatCommandReceived;
-            }
         }
 
         private async void ChatCommandReceived(object sender, OnChatCommandReceivedArgs e) {
@@ -82,9 +79,9 @@ namespace Aiva.Extensions.StreamGames {
                 foreach(var winner in Winners) {
                     await _databaseCurrencyHandler.Add.Add(winner.TwitchID, winner.Bet);
                 }
-            }
 
-            WriteWinnersInChat(Winners);
+                WriteWinnersInChat(Winners);
+            }
         }
 
         private void WriteWinnersInChat(List<UserBetModel> winners) {
@@ -156,6 +153,20 @@ namespace Aiva.Extensions.StreamGames {
                 channel: Core.Config.ConfigHandler.Config.General.Channel,
                 message: $"New Bankheist started! Write !{Core.Config.ConfigHandler.Config.StreamGames.Bankheist.General.Command} in the Chat to rob the bank!",
                 dryRun: AivaClient.DryRun);
+        }
+
+        public void StartGame() {
+            _bankheistEndTimer = null;
+            _userList = null;
+            _nextStartAfterCooldown = default(DateTime);
+            AivaClient.TwitchClient.OnChatCommandReceived += ChatCommandReceived;
+        }
+
+        public void StopGame() {
+            _bankheistEndTimer = null;
+            _userList = null;
+            _nextStartAfterCooldown = default(DateTime);
+            AivaClient.TwitchClient.OnChatCommandReceived -= ChatCommandReceived;
         }
     }
 }

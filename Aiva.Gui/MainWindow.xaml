@@ -77,7 +77,11 @@
 
                     <controls:HamburgerMenuIconItem Icon="{iconPacks:Material Kind=Help}" Label="Voting" />
 
-                    <controls:HamburgerMenuIconItem Icon="{iconPacks:Material Kind=GamepadVariant}" Label="Streamgames" />
+                    <controls:HamburgerMenuIconItem Icon="{iconPacks:Material Kind=GamepadVariant}" Label="Streamgames">
+                        <controls:HamburgerMenuIconItem.Tag>
+                            <views:StreamGames />
+                        </controls:HamburgerMenuIconItem.Tag>
+                    </controls:HamburgerMenuIconItem>
 
                     <controls:HamburgerMenuIconItem Icon="{iconPacks:Material Kind=Fire}" Label="Spam Protection" />
                 </controls:HamburgerMenuItemCollection>
