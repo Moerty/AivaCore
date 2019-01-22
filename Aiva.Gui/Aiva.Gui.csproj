@@ -18,8 +18,15 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <None Remove="Images\Badges\prime.png" />
       <None Remove="Views\Tabs\Console.xaml" />
       <None Remove="Views\Windows\SetupWindow.xaml" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="Images\Badges\prime.png">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      </Content>
     </ItemGroup>
 
     <ItemGroup>
@@ -48,11 +55,6 @@
       <Compile Update="Views\Windows\SetupWindow.xaml.cs">
         <SubType>Code</SubType>
       </Compile>
-    </ItemGroup>
-    <ItemGroup>
-      <None Update="Images\Badges\chatmod.png">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
     </ItemGroup>
 
     <!--

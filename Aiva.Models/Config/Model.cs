@@ -152,6 +152,9 @@ namespace Aiva.Models.Config {
 
             [JsonProperty("BotUserID")]
             public string BotUserID { get; set; }
+
+            [JsonProperty("ChannelId")]
+            public string ChannelID { get; set; }
         }
 
         public partial class Currency {

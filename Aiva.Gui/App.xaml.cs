@@ -34,11 +34,11 @@ namespace Aiva.Gui {
             auth.SendRequestToBrowser(e.ClientId);
 
             var result = await auth.GetAuthenticationValuesAsync().ConfigureAwait(false);
-
-            var isValid = await Aiva.Core.Twitch.AivaClient.CheckBotuser(e.ClientId, result.Token);
+            var isValid = await Core.Twitch.AivaClient.CheckBotuser(e.ClientId, result.Token).ConfigureAwait(false);
+            var channelDetails = await Core.Twitch.AivaClient.GetChannelDetails(result.Token, e.Channel).ConfigureAwait(false);
 
             if (isValid) {
-                new Core.Config.ConfigHandler(e.ClientId, result.Token, e.Botname, e.Channel);
+                new Core.Config.ConfigHandler(e.ClientId, result.Token, e.Botname, e.Channel, channelDetails.Id);
 
                 Dispatcher.Invoke(new Action(() => StartApp(this, EventArgs.Empty)));
                 Dispatcher.Invoke(new Action(() => setupWindow.Close()));

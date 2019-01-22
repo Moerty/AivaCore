@@ -20,34 +20,73 @@
             <ColumnDefinition Width="30*" />
         </Grid.ColumnDefinitions>
 
-        <ScrollViewer
+        <ItemsControl ItemsSource="{Binding Message}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <ItemsControl ItemsSource="{Binding Badges}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Image
+                                        Width="18"
+                                        Height="18"
+                                        Margin="5"
+                                        Source="{Binding ., Converter={StaticResource badgeConverter}}" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <!--<ItemsControl DockPanel.Dock="Left" ItemsSource="{Binding Badges}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Image
+                                        Width="18"
+                                        Height="18"
+                                        Margin="5"
+                                        Source="{Binding ., Converter={StaticResource badgeConverter}}" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>-->
+
+                        <Separator />
+                        <TextBlock Text="{Binding Username}" />
+                        <Separator />
+                        <TextBlock Text="{Binding Message}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <!--<ScrollViewer
             Grid.Column="0"
-            Height="300"
             Padding="4"
             internal:ScrollViewerExtension.AutoScroll="True"
-            BorderBrush="BlanchedAlmond"
-            BorderThickness="2"
             HorizontalScrollBarVisibility="Disabled">
             <ItemsControl ItemsSource="{Binding Message}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Vertical" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
                             <ItemsControl ItemsSource="{Binding Badges}">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <Image Margin="5" Source="{Binding ., Converter={StaticResource badgeConverter}}" />
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
+                                <Image Margin="5" Source="{Binding ., Converter={StaticResource badgeConverter}}" />
                             </ItemsControl>
-                            <Separator />
-                            <TextBlock Text="{Binding Username}" />
-                            <Separator />
-                            <TextBlock Text="{Binding Message}" />
+                            <TextBlock TextWrapping="WrapWithOverflow">
+                                <Run
+                                    FontWeight="Bold"
+                                    Foreground="{Binding Color}"
+                                    Text="{Binding User, StringFormat={}{0}:}" />
+                                <Run Text="{Binding Message}" />
+                            </TextBlock>
                         </StackPanel>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
             </ItemsControl>
-            <!--<ItemsControl ItemsSource="{Binding Message}">
+        </ScrollViewer>-->
+        <!--<ItemsControl ItemsSource="{Binding Message}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <TextBlock TextWrapping="Wrap">
@@ -74,7 +113,6 @@
                     </ContextMenu>
                 </ItemsControl.ContextMenu>
             </ItemsControl>-->
-        </ScrollViewer>
         <ListBox
             Grid.Column="1"
             Height="300"
