@@ -36,7 +36,7 @@ namespace Aiva.Core.Config {
         /// <summary>
         /// Save config to disc
         /// </summary>
-        public void SaveConfig() {
+        public static void SaveConfig() {
             var json = JsonConvert.SerializeObject(Config);
             File.WriteAllText(GetConfigPath(), json);
         }

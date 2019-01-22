@@ -18,8 +18,20 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <None Remove="Views\Tabs\Console.xaml" />
+      <None Remove="Views\Windows\SetupWindow.xaml" />
+    </ItemGroup>
+
+    <ItemGroup>
         <PackageReference Include="MahApps.Metro" Version="2.0.0-alpha0212" />
         <PackageReference Include="MahApps.Metro.IconPacks" Version="3.0.0-alpha0096" />
+        <PackageReference Include="PropertyChanged.Fody" Version="2.6.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Aiva.Core\Aiva.Core.csproj" />
+      <ProjectReference Include="..\Aiva.Extensions\Aiva.Extensions.csproj" />
+      <ProjectReference Include="..\Aiva.Models\Aiva.Models.csproj" />
     </ItemGroup>
 
     <ItemGroup>
@@ -28,6 +40,14 @@
     <ItemGroup>
         <Compile DependentUpon="%(Filename)" SubType="Code" Update="**\obj\**\*.g$(DefaultLanguageSourceExtension)" />
         <Compile DependentUpon="%(Filename)" SubType="Designer" Update="**\*.xaml$(DefaultLanguageSourceExtension)" />
+    </ItemGroup>
+    <ItemGroup>
+      <Compile Update="Views\Tabs\Console.xaml.cs">
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\Windows\SetupWindow.xaml.cs">
+        <SubType>Code</SubType>
+      </Compile>
     </ItemGroup>
 
     <!--
