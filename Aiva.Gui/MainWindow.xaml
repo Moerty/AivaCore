@@ -13,12 +13,92 @@
         <controls:WindowButtonCommands Style="{DynamicResource MahApps.Metro.Styles.WindowButtonCommands.Win10}" />
     </controls:MetroWindow.WindowButtonCommands>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="9*"/>
-            <RowDefinition Height="1*"/>
-        </Grid.RowDefinitions>
-        <Label Content="Hello .NET Core and MahApps.Metro!" HorizontalAlignment="Center" VerticalAlignment="Center"
-               FontSize="40"/>
-        <Button Content="Exit" Grid.Row="1" FontSize="20" Click="ButtonExit_Click"/>
+
+        <Grid.Resources>
+            <ResourceDictionary>
+                <DataTemplate x:Key="MenuItemTemplate" DataType="{x:Type controls:HamburgerMenuGlyphItem}">
+                    <Grid Height="48">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="48" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0"
+                    FontSize="16"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontFamily="Segoe MDL2 Assets"
+                    Foreground="White"
+                    Text="{Binding Glyph}" />
+                        <TextBlock Grid.Column="1"
+                    VerticalAlignment="Center"
+                    FontSize="16"
+                    Foreground="White"
+                    Text="{Binding Label}" />
+                    </Grid>
+                </DataTemplate>
+
+
+            </ResourceDictionary>
+        </Grid.Resources>
+
+        <controls:HamburgerMenu
+            ItemClick="HamburgerMenuControl_OnItemClick"
+            OptionsItemClick="HamburgerMenuControl_OnItemClick"
+            x:Name="HamburgerMenuControl"
+            Foreground="White" PaneBackground="#FF444444"
+            IsPaneOpen="True"
+            DisplayMode="CompactInline"
+            ItemTemplate="{StaticResource MenuItemTemplate}"
+            OptionsItemTemplate="{StaticResource MenuItemTemplate}">
+            <controls:HamburgerMenu.ItemsSource>
+                <controls:HamburgerMenuItemCollection>
+                    <controls:HamburgerMenuGlyphItem Glyph="" Label="Home">
+
+                    </controls:HamburgerMenuGlyphItem>
+
+                    <controls:HamburgerMenuGlyphItem Glyph="" Label="Private">
+
+                    </controls:HamburgerMenuGlyphItem>
+
+                    <controls:HamburgerMenuGlyphItem Glyph="" Label="Settings">
+
+                    </controls:HamburgerMenuGlyphItem>
+                </controls:HamburgerMenuItemCollection>
+            </controls:HamburgerMenu.ItemsSource>
+
+            <!--  Options  -->
+            <controls:HamburgerMenu.OptionsItemsSource>
+                <controls:HamburgerMenuItemCollection>
+                    <controls:HamburgerMenuGlyphItem Glyph="" Label="About">
+
+                    </controls:HamburgerMenuGlyphItem>
+                </controls:HamburgerMenuItemCollection>
+            </controls:HamburgerMenu.OptionsItemsSource>
+
+            <controls:HamburgerMenu.ContentTemplate>
+                <DataTemplate DataType="{x:Type controls:HamburgerMenuItem}">
+                    <Grid x:Name="TheContentGrid">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="48" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Border Grid.Row="0"
+                    Background="#FF444444">
+                            <TextBlock x:Name="Header"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="24"
+                            Foreground="White"
+                            Text="{Binding Label}" />
+                        </Border>
+                        <ContentControl x:Name="TheContent"
+                            Grid.Row="1"
+                            Focusable="False"
+                            Foreground="{DynamicResource BlackBrush}"
+                            Content="{Binding Tag}" />
+                    </Grid>
+                </DataTemplate>
+            </controls:HamburgerMenu.ContentTemplate>
+        </controls:HamburgerMenu>
     </Grid>
 </controls:MetroWindow>
