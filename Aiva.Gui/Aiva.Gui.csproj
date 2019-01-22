@@ -49,6 +49,11 @@
         <SubType>Code</SubType>
       </Compile>
     </ItemGroup>
+    <ItemGroup>
+      <None Update="Images\Badges\chatmod.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
 
     <!--
     Workaround to fix IntelliSense file generation for XAML projects
