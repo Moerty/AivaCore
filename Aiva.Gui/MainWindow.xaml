@@ -1,77 +1,87 @@
-﻿<controls:MetroWindow x:Class="Aiva.Gui.MainWindow"
-                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                      xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
-                      xmlns:local="clr-namespace:Aiva.Gui"
-                      mc:Ignorable="d"
-                      GlowBrush="{DynamicResource AccentColorBrush}"
-                      WindowStartupLocation="CenterScreen"
-                      Title="MainWindow" Height="450" Width="800">
+﻿<controls:MetroWindow
+    x:Class="Aiva.Gui.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:local="clr-namespace:Aiva.Gui"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="MainWindow"
+    Width="800"
+    Height="450"
+    GlowBrush="{DynamicResource AccentColorBrush}"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
     <controls:MetroWindow.WindowButtonCommands>
         <controls:WindowButtonCommands Style="{DynamicResource MahApps.Metro.Styles.WindowButtonCommands.Win10}" />
     </controls:MetroWindow.WindowButtonCommands>
     <Grid>
 
         <Grid.Resources>
-            <ResourceDictionary>
-                <DataTemplate x:Key="MenuItemTemplate" DataType="{x:Type controls:HamburgerMenuGlyphItem}">
-                    <Grid Height="48">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="48" />
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0"
-                    FontSize="16"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontFamily="Segoe MDL2 Assets"
-                    Foreground="White"
-                    Text="{Binding Glyph}" />
-                        <TextBlock Grid.Column="1"
-                    VerticalAlignment="Center"
-                    FontSize="16"
-                    Foreground="White"
-                    Text="{Binding Label}" />
-                    </Grid>
-                </DataTemplate>
-
-
-            </ResourceDictionary>
+            <DataTemplate x:Key="MenuItemTemplate" DataType="{x:Type controls:HamburgerMenuIconItem}">
+                <Grid
+                    x:Name="RootGrid"
+                    Height="48"
+                    Background="Transparent">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="48" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <ContentControl
+                        Grid.Column="0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Content="{Binding Icon}"
+                        Focusable="False" />
+                    <TextBlock
+                        Grid.Column="1"
+                        VerticalAlignment="Center"
+                        FontSize="16"
+                        Text="{Binding Label}" />
+                </Grid>
+                <DataTemplate.Triggers>
+                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:HamburgerMenu}}, Path=IsPaneOpen}" Value="False">
+                        <Setter TargetName="RootGrid" Property="ToolTip" Value="{Binding ToolTip, Mode=OneWay}" />
+                    </DataTrigger>
+                </DataTemplate.Triggers>
+            </DataTemplate>
         </Grid.Resources>
 
         <controls:HamburgerMenu
-            ItemClick="HamburgerMenuControl_OnItemClick"
-            OptionsItemClick="HamburgerMenuControl_OnItemClick"
             x:Name="HamburgerMenuControl"
-            Foreground="White" PaneBackground="#FF444444"
-            IsPaneOpen="True"
             DisplayMode="CompactInline"
+            Foreground="White"
+            IsPaneOpen="True"
+            ItemClick="HamburgerMenuControl_OnItemClick"
             ItemTemplate="{StaticResource MenuItemTemplate}"
-            OptionsItemTemplate="{StaticResource MenuItemTemplate}">
+            OptionsItemClick="HamburgerMenuControl_OnItemClick"
+            OptionsItemTemplate="{StaticResource MenuItemTemplate}"
+            PaneBackground="#FF444444">
             <controls:HamburgerMenu.ItemsSource>
                 <controls:HamburgerMenuItemCollection>
-                    <controls:HamburgerMenuGlyphItem Glyph="" Label="Home">
+                    <controls:HamburgerMenuIconItem Icon="{iconPacks:Material Kind=ViewDashboard}" Label="Dashboard" />
 
-                    </controls:HamburgerMenuGlyphItem>
+                    <controls:HamburgerMenuIconItem Icon="{iconPacks:Material Kind=Console}" Label="Console" />
 
-                    <controls:HamburgerMenuGlyphItem Glyph="" Label="Private">
+                    <controls:HamburgerMenuIconItem Icon="{iconPacks:Material Kind=Music}" Label="Songrequest" />
 
-                    </controls:HamburgerMenuGlyphItem>
+                    <controls:HamburgerMenuIconItem Icon="{iconPacks:Material Kind=Gift}" Label="Giveaway" />
 
-                    <controls:HamburgerMenuGlyphItem Glyph="" Label="Settings">
+                    <controls:HamburgerMenuIconItem Icon="{iconPacks:Material Kind=ClockOutline}" Label="Timers" />
 
-                    </controls:HamburgerMenuGlyphItem>
+                    <controls:HamburgerMenuIconItem Icon="{iconPacks:Material Kind=Help}" Label="Voting" />
+
+                    <controls:HamburgerMenuIconItem Icon="{iconPacks:Material Kind=GamepadVariant}" Label="Streamgames" />
+
+                    <controls:HamburgerMenuIconItem Icon="{iconPacks:Material Kind=Fire}" Label="Spam Protection" />
                 </controls:HamburgerMenuItemCollection>
             </controls:HamburgerMenu.ItemsSource>
 
             <!--  Options  -->
             <controls:HamburgerMenu.OptionsItemsSource>
                 <controls:HamburgerMenuItemCollection>
-                    <controls:HamburgerMenuGlyphItem Glyph="" Label="About">
-
-                    </controls:HamburgerMenuGlyphItem>
+                    <controls:HamburgerMenuIconItem Icon="{iconPacks:Material Kind=SettingsOutline}" Label="Options" />
                 </controls:HamburgerMenuItemCollection>
             </controls:HamburgerMenu.OptionsItemsSource>
 
@@ -82,20 +92,21 @@
                             <RowDefinition Height="48" />
                             <RowDefinition />
                         </Grid.RowDefinitions>
-                        <Border Grid.Row="0"
-                    Background="#FF444444">
-                            <TextBlock x:Name="Header"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            FontSize="24"
-                            Foreground="White"
-                            Text="{Binding Label}" />
+                        <Border Grid.Row="0" Background="#FF444444">
+                            <TextBlock
+                                x:Name="Header"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                FontSize="24"
+                                Foreground="White"
+                                Text="{Binding Label}" />
                         </Border>
-                        <ContentControl x:Name="TheContent"
+                        <ContentControl
+                            x:Name="TheContent"
                             Grid.Row="1"
+                            Content="{Binding Tag}"
                             Focusable="False"
-                            Foreground="{DynamicResource BlackBrush}"
-                            Content="{Binding Tag}" />
+                            Foreground="{DynamicResource BlackBrush}" />
                     </Grid>
                 </DataTemplate>
             </controls:HamburgerMenu.ContentTemplate>
