@@ -40,15 +40,17 @@ namespace Aiva.Gui.ViewModels.Tabs {
         }
 
         private async void ShowBankheistSettings() {
-            var optionsChildWindow = new Views.ChildWindows.BankheistSettings();
-            var currentStateActive = Core.Config.ConfigHandler.Config.StreamGames.Bankheist.General.Active;
+            if (Application.Current.MainWindow != null) {
+                var optionsChildWindow = new Views.ChildWindows.BankheistSettings();
+                var currentStateActive = Core.Config.ConfigHandler.Config.StreamGames.Bankheist.General.Active;
 
-            optionsChildWindow.ClosingFinished
-                += (s, args)
-                => { IsBankheistActive = false; IsBankheistActive = currentStateActive; };
+                optionsChildWindow.ClosingFinished
+                    += (s, args)
+                    => { IsBankheistActive = false; IsBankheistActive = currentStateActive; };
 
-            await((MetroWindow)Application.Current.MainWindow).ShowChildWindowAsync(optionsChildWindow)
-                .ConfigureAwait(false);
+                await ((MetroWindow)Application.Current.MainWindow).ShowChildWindowAsync(optionsChildWindow)
+                    .ConfigureAwait(false);
+            }
         }
     }
 }

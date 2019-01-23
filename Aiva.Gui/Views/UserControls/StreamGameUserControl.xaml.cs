@@ -21,8 +21,6 @@ namespace Aiva.Gui.Views.UserControls {
             InitializeComponent();
         }
 
-
-
         public bool IsActive {
             get { return (bool)GetValue(IsActiveProperty); }
             set { SetValue(IsActiveProperty, value); }
@@ -42,6 +40,19 @@ namespace Aiva.Gui.Views.UserControls {
         // Using a DependencyProperty as the backing store for ShowSettingsCommand.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ShowSettingsCommandProperty =
             DependencyProperty.Register("ShowSettingsCommand", typeof(ICommand), typeof(StreamGameUserControl), new PropertyMetadata(default(ICommand)));
+
+
+
+        public string GameName {
+            get { return (string)GetValue(GameNameProperty); }
+            set { SetValue(GameNameProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for GameName.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty GameNameProperty =
+            DependencyProperty.Register("GameName", typeof(string), typeof(StreamGameUserControl), new PropertyMetadata(string.Empty));
+
+
 
 
     }

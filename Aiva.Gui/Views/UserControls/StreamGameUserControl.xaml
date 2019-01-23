@@ -8,20 +8,27 @@
     xmlns:local="clr-namespace:Aiva.Gui.Views.UserControls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Name="root"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
     mc:Ignorable="d">
     <Grid>
-        <StackPanel Height="100" Orientation="Horizontal">
-            <controls:ToggleSwitch Header="Bankheist" IsChecked="{Binding ElementName=root, Path=IsActive}" />
-            <Button
-                Width="50"
-                Height="50"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Command="{Binding ElementName=root, Path=ShowSettingsCommand}"
-                Content="{iconPacks:Material Kind=Settings}"
-                Style="{DynamicResource MahApps.Metro.Styles.MetroCircleButtonStyle}" />
-        </StackPanel>
+        <Border BorderBrush="Black" BorderThickness="1">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="{Binding ElementName=root, Path=GameName}" />
+                <StackPanel Orientation="Horizontal">
+                    <controls:ToggleSwitch
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Header="Bankheist"
+                        IsChecked="{Binding ElementName=root, Path=IsActive}" />
+                    <Button
+                        Width="50"
+                        Height="50"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Command="{Binding ElementName=root, Path=ShowSettingsCommand}"
+                        Content="{iconPacks:Material Kind=Settings}"
+                        Style="{DynamicResource MahApps.Metro.Styles.MetroCircleButtonStyle}" />
+                </StackPanel>
+            </StackPanel>
+        </Border>
     </Grid>
 </controls:MetroContentControl>

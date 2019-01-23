@@ -1,29 +1,96 @@
-﻿<simpleChildWindow:ChildWindow x:Class="Aiva.Gui.Views.ChildWindows.BankheistSettings"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:simpleChildWindow="http://metro.mahapps.com/winfx/xaml/simplechildwindow"
-             xmlns:local="clr-namespace:Aiva.Gui.Views.ChildWindows"
-             mc:Ignorable="d" 
-             AllowDrop="True"
-            AllowMove="False"
-            BorderBrush="{DynamicResource AccentBaseColorBrush}"
-            BorderThickness="1"
-            ChildWindowHeight="370"
-            ChildWindowWidth="500"
-            EnableDropShadow="True"
-            GlowBrush="{DynamicResource AccentColorBrush}"
-            IsOpen="True"
-            ShowCloseButton="True"
-                               Closing="ChildWindow_Closing"
-            ShowTitleBar="True"
-            Title="Bankheist Options"
-            d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="50*"/>
-            <ColumnDefinition Width="50*"/>
-        </Grid.ColumnDefinitions>
-    </Grid>
+﻿<simpleChildWindow:ChildWindow
+    x:Class="Aiva.Gui.Views.ChildWindows.BankheistSettings"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Aiva.Gui.Views.ChildWindows"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:simpleChildWindow="http://metro.mahapps.com/winfx/xaml/simplechildwindow"
+    xmlns:userControls="clr-namespace:Aiva.Gui.Views.UserControls"
+    Title="Bankheist Options"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    AllowDrop="True"
+    AllowMove="False"
+    BorderBrush="{DynamicResource AccentBaseColorBrush}"
+    BorderThickness="1"
+    ChildWindowHeight="370"
+    ChildWindowWidth="500"
+    Closing="ChildWindow_Closing"
+    EnableDropShadow="True"
+    GlowBrush="{DynamicResource AccentColorBrush}"
+    IsOpen="True"
+    ShowCloseButton="True"
+    ShowTitleBar="True"
+    mc:Ignorable="d">
+
+    <ScrollViewer>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <StackPanel Orientation="Vertical">
+                    <TextBox
+                        controls:TextBoxHelper.AutoWatermark="True"
+                        controls:TextBoxHelper.Watermark="Command..."
+                        Text="{Binding Properties.Command}" />
+
+                    <Slider
+                        Margin="5"
+                        controls:SliderHelper.ChangeValueBy="SmallChange"
+                        IsSnapToTickEnabled="True"
+                        Maximum="50"
+                        Minimum="1"
+                        Template="{StaticResource MetroHorizontalSliderWithValueOnThumb}"
+                        TickFrequency="5"
+                        TickPlacement="BottomRight"
+                        Value="{Binding Properties.BankheistCooldown}" />
+                </StackPanel>
+            </Grid>
+
+            <userControls:BankSettingUserControl
+                Grid.Row="1"
+                Bank="Bank 1"
+                MinUserForBank="{Binding Properties.MinUserBank1}"
+                SuccessRateForBank="{Binding SuccessRateBank1}"
+                WinningMultiplierForBank="{Binding Properties.WinningMultiplierBank1}" />
+
+            <userControls:BankSettingUserControl
+                Grid.Row="2"
+                Bank="Bank 2"
+                MinUserForBank="{Binding Properties.MinUserBank2}"
+                SuccessRateForBank="{Binding SuccessRateBank2}"
+                WinningMultiplierForBank="{Binding Properties.WinningMultiplierBank2}" />
+
+
+            <userControls:BankSettingUserControl
+                Grid.Row="3"
+                Bank="Bank 3"
+                MinUserForBank="{Binding Properties.MinUserBank3}"
+                SuccessRateForBank="{Binding SuccessRateBank3}"
+                WinningMultiplierForBank="{Binding Properties.WinningMultiplierBank3}" />
+
+            <userControls:BankSettingUserControl
+                Grid.Row="4"
+                Bank="4"
+                MinUserForBank="{Binding Properties.MinUserBank4}"
+                SuccessRateForBank="{Binding SuccessRateBank4}"
+                WinningMultiplierForBank="{Binding Properties.WinningMultiplierBank4}" />
+
+            <userControls:BankSettingUserControl
+                Grid.Row="5"
+                Bank="5"
+                MinUserForBank="{Binding Properties.MinUserBank5}"
+                SuccessRateForBank="{Binding SuccessRateBank5}"
+                WinningMultiplierForBank="{Binding Properties.WinningMultiplierBank5}" />
+        </Grid>
+    </ScrollViewer>
 </simpleChildWindow:ChildWindow>

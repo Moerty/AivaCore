@@ -19,9 +19,11 @@
 
     <ItemGroup>
       <None Remove="Images\Badges\prime.png" />
+      <None Remove="Styles\Slider.xaml" />
       <None Remove="Views\ChildWindows\BankheistSettings.xaml" />
       <None Remove="Views\Tabs\Console.xaml" />
       <None Remove="Views\Tabs\StreamGames.xaml" />
+      <None Remove="Views\UserControls\BankSettingUserControl.xaml" />
       <None Remove="Views\UserControls\StreamGameUserControl.xaml" />
       <None Remove="Views\Windows\SetupWindow.xaml" />
     </ItemGroup>
@@ -78,6 +80,9 @@
         <SubType>Code</SubType>
       </Compile>
       <Compile Update="Views\Tabs\StreamGames.xaml.cs">
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\UserControls\BankSettingUserControl.xaml.cs">
         <SubType>Code</SubType>
       </Compile>
       <Compile Update="Views\UserControls\StreamGameUserControl.xaml.cs">

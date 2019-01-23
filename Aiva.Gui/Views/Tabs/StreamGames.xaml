@@ -11,17 +11,13 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition />
-        </Grid.RowDefinitions>
-
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
-
-        <Grid Grid.Row="0" Grid.Column="0">
-            <userControls:StreamGameUserControl IsActive="{Binding IsBankheistActive, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ShowSettingsCommand="{Binding ShowBankheistSettingsCommand}" />
-        </Grid>
-    </Grid>
+    <DockPanel
+        Margin="10"
+        HorizontalAlignment="Stretch"
+        VerticalAlignment="Top">
+        <userControls:StreamGameUserControl
+            DockPanel.Dock="Left"
+            IsActive="{Binding IsBankheistActive, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            ShowSettingsCommand="{Binding ShowBankheistSettingsCommand}" />
+    </DockPanel>
 </controls:MetroContentControl>
