@@ -12,6 +12,8 @@
     Width="800"
     Height="450"
     GlowBrush="{DynamicResource AccentColorBrush}"
+    Loaded="MetroWindow_Loaded"
+    ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <controls:MetroWindow.WindowButtonCommands>

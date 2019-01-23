@@ -27,7 +27,7 @@
                     Grid.RowSpan="4"
                     Orientation="Vertical">
                     <TextBlock Text="{Binding ElementName=root, Path=Bank}" />
-                    <RibbonSeparator />
+                    <Separator/>
 
                     <!--    -->
                     <StackPanel Grid.Row="1" Orientation="Vertical">

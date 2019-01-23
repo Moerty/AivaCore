@@ -32,5 +32,9 @@ namespace Aiva.Gui
             // close the pane
             this.HamburgerMenuControl.IsPaneOpen = false;
         }
+
+        private void MetroWindow_Loaded(object sender, RoutedEventArgs e) {
+            Application.Current.MainWindow = this;
+        }
     }
 }
