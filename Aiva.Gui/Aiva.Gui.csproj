@@ -22,6 +22,7 @@
       <None Remove="Views\ChildWindows\BankheistSettings.xaml" />
       <None Remove="Views\Tabs\Console.xaml" />
       <None Remove="Views\Tabs\StreamGames.xaml" />
+      <None Remove="Views\UserControls\StreamGameUserControl.xaml" />
       <None Remove="Views\Windows\SetupWindow.xaml" />
     </ItemGroup>
 
@@ -77,6 +78,9 @@
         <SubType>Code</SubType>
       </Compile>
       <Compile Update="Views\Tabs\StreamGames.xaml.cs">
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\UserControls\StreamGameUserControl.xaml.cs">
         <SubType>Code</SubType>
       </Compile>
       <Compile Update="Views\Windows\SetupWindow.xaml.cs">

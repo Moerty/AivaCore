@@ -7,6 +7,7 @@
     xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
     xmlns:local="clr-namespace:Aiva.Gui.Views.Tabs"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:userControls="clr-namespace:Aiva.Gui.Views.UserControls"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
@@ -20,17 +21,7 @@
         </Grid.ColumnDefinitions>
 
         <Grid Grid.Row="0" Grid.Column="0">
-            <StackPanel Height="100" Orientation="Horizontal">
-                <controls:ToggleSwitch Header="Bankheist" IsChecked="{Binding IsBankheistActive}" />
-                <Button
-                    Width="50"
-                    Height="50"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Click="BankheistSettings_Clicked"
-                    Content="{iconPacks:Material Kind=Settings}"
-                    Style="{DynamicResource MahApps.Metro.Styles.MetroCircleButtonStyle}" />
-            </StackPanel>
+            <userControls:StreamGameUserControl IsActive="{Binding IsBankheistActive, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ShowSettingsCommand="{Binding ShowBankheistSettingsCommand}" />
         </Grid>
     </Grid>
 </controls:MetroContentControl>

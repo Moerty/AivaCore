@@ -22,14 +22,5 @@ namespace Aiva.Gui.Views.Tabs {
             _viewModel = new ViewModels.Tabs.StreamGamesViewModel();
             this.DataContext = _viewModel;
         }
-
-        private async void BankheistSettings_Clicked(object sender, RoutedEventArgs e) {
-            var optionsChildWindow = new Views.ChildWindows.BankheistSettings();
-            optionsChildWindow.ClosingFinished 
-                += (s, args) 
-                => { _viewModel.IsBankheistActive = false; _viewModel.IsBankheistActive = true; };
-            await ((MetroWindow)Application.Current.MainWindow).ShowChildWindowAsync(optionsChildWindow)
-                .ConfigureAwait(false);
-        }
     }
 }
