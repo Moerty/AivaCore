@@ -33,10 +33,3 @@ build-extensions:
  tags:
   - dotnet
   
-build-console:
- stage: build-console
- script:
-  - "cd Aiva.Console"
-  - "dotnet build"
- tags:
-  - dotnet
