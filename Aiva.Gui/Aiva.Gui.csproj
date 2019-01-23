@@ -22,6 +22,7 @@
       <None Remove="Styles\Slider.xaml" />
       <None Remove="Views\ChildWindows\BankheistSettings.xaml" />
       <None Remove="Views\Tabs\Console.xaml" />
+      <None Remove="Views\Tabs\Dashboard.xaml" />
       <None Remove="Views\Tabs\StreamGames.xaml" />
       <None Remove="Views\UserControls\BankSettingUserControl.xaml" />
       <None Remove="Views\UserControls\StreamGameUserControl.xaml" />
@@ -35,6 +36,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
         <PackageReference Include="MahApps.Metro" Version="2.0.0-alpha0212" />
         <PackageReference Include="MahApps.Metro.IconPacks" Version="3.0.0-alpha0096" />
         <PackageReference Include="MahApps.Metro.SimpleChildWindow" Version="2.0.0-alpha0005" />
