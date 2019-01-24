@@ -7,7 +7,7 @@ namespace Aiva.Gui.Views.Tabs {
     public partial class Dashboard : MetroContentControl {
         public Dashboard() {
             InitializeComponent();
-            this.DataContext = new ViewModels.Tabs.Dashboard();
+            this.DataContext = new ViewModels.Tabs.DashboardViewModel();
         }
     }
 }

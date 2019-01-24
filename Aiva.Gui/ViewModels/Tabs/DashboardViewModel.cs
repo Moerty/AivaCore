@@ -13,7 +13,7 @@ using TwitchLib.Client.Extensions;
 
 namespace Aiva.Gui.ViewModels.Tabs {
     [AddINotifyPropertyChangedInterface]
-    public class Dashboard {
+    public class DashboardViewModel {
         public int TotalViewers { get; set; }
         public SeriesCollection CurrentViewersSeries { get; set; }
         public bool IsTotalViewersGraphActive { get; set; } = true;
@@ -47,7 +47,7 @@ namespace Aiva.Gui.ViewModels.Tabs {
         
         private bool _isPartnered;
 
-        public Dashboard() {
+        public DashboardViewModel() {
             AivaClient.TwitchClient.OnExistingUsersDetected
                 += (s, e)
                 => TotalViewers += e.Users.Count;
