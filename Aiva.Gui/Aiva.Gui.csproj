@@ -9,7 +9,7 @@
 		<RuntimeIdentifiers>
 		<RuntimeIdentifiers>win10-x64</RuntimeIdentifiers>
 	</RuntimeIdentifiers>
-		<ApplicationIcon />
+		<ApplicationIcon>Icon.ico</ApplicationIcon>
 		<StartupObject />
     </PropertyGroup>
 
