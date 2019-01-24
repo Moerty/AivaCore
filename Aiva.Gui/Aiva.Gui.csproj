@@ -19,6 +19,7 @@
 
     <ItemGroup>
       <None Remove="Images\Badges\prime.png" />
+      <None Remove="Styles\MyToggleButton.xaml" />
       <None Remove="Styles\Slider.xaml" />
       <None Remove="Views\ChildWindows\BankheistSettings.xaml" />
       <None Remove="Views\Tabs\Console.xaml" />

@@ -69,7 +69,6 @@ namespace Aiva.Gui.ViewModels.Tabs {
                     if (e.ChannelState.SubOnly.HasValue) {
                         SubsOnly = e.ChannelState.SubOnly.Value;
                     }
-
                 };
 
             CurrentViewersSeries = new SeriesCollection {

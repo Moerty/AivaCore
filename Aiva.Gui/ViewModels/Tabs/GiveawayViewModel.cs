@@ -15,11 +15,15 @@ namespace Aiva.Gui.ViewModels.Tabs {
         public bool WithActiveTime { get; set; }
         public bool WithKeyword { get; set; }
 
-        public int Currency { get; set; } = 100;
-        public int SubscriberLuck { get; set; } = 1;
+        public int Currency { get; set; }
+        public int SubscribedTime { get; set; }
+        public int SubscriberLuck { get; set; }
 
         public bool UncheckWinner { get; set; } = true;
         public bool AnnounceWinner { get; set; } = true;
+
+        public bool IsCaseSensitive { get; set; }
+        public bool IsKeywordAntispamActive { get; set; }
         
         public string ForbiddenWords { get; set; }
 
