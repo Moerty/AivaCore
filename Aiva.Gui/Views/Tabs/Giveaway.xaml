@@ -257,13 +257,39 @@
                     <Slider
                         Name="activeTimeSlider"
                         Maximum="240"
-                        Minimum="1" />
+                        Minimum="1">
+                        <Slider.Style>
+                            <Style TargetType="Slider">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding WithActiveTime}" Value="True">
+                                        <Setter Property="IsEnabled" Value="True" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding WithActiveTime}" Value="False">
+                                        <Setter Property="IsEnabled" Value="False" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Slider.Style>
+                    </Slider>
                 </StackPanel>
 
                 <Separator />
 
                 <StackPanel Orientation="Vertical">
-                    <TextBox controls:TextBoxHelper.AutoWatermark="True" controls:TextBoxHelper.Watermark="Enter keyword ..." />
+                    <TextBox controls:TextBoxHelper.AutoWatermark="True" controls:TextBoxHelper.Watermark="Enter keyword ...">
+                        <TextBox.Style>
+                            <Style BasedOn="{StaticResource MetroTextBox}" TargetType="TextBox">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding WithKeyword}" Value="True">
+                                        <Setter Property="IsEnabled" Value="True" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding WithKeyword}" Value="False">
+                                        <Setter Property="IsEnabled" Value="False" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
                     <CheckBox IsChecked="{Binding IsCaseSensitive}">
                         <CheckBox.Style>
                             <Style BasedOn="{StaticResource MetroCheckBox}" TargetType="CheckBox">
@@ -339,12 +365,38 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
-                    <Button Grid.Column="0" Content="{iconPacks:FontAwesome Kind=UndoSolid}" />
+                    <Button
+                        Grid.Column="0"
+                        Content="{iconPacks:FontAwesome Kind=UndoSolid}"
+                        Focusable="False" />
 
                     <Button
                         Grid.Column="1"
                         BorderBrush="LightGreen"
-                        Content="{iconPacks:FontAwesome Kind=DiceSolid}" />
+                        Content="{iconPacks:FontAwesome Kind=DiceSolid}"
+                        Focusable="False" />
+                </Grid>
+
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <TextBlock
+                            FontSize="20"
+                            FontStyle="Oblique"
+                            Text="Winner" />
+                    </Grid>
+
+                    <Grid Grid.Row="1">
+                        <Ellipse Width="150" Height="150">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="https://pbs.twimg.com/media/BnQRhIGCEAA_Gnl.jpg" />
+                            </Ellipse.Fill>
+                        </Ellipse>
+                    </Grid>
                 </Grid>
             </Grid>
 
