@@ -1,7 +1,8 @@
 {
   "Credentials": {
-    "TwitchOAuth": "",
-    "TwitchClientID": ""
+    "BotOAuthToken": "",
+    "TwitchClientID": "",
+    "StreamerOAuthToken": ""
   },
   "General": {
     "Channel": "",

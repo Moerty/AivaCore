@@ -12,13 +12,13 @@ namespace Aiva.Core.Twitch.Commands {
         }
 
         internal async void OnChatCommandReceived(object sender, OnChatCommandReceivedArgs e) {
-            if(e.Command.CommandText == Config.ConfigHandler.Config.Currency.CurrencyCommands.GetCurrency && e.Command.ArgumentsAsList?.Count == 0) {
+            if(e.Command.CommandText == ConfigHandler.Config.Currency.CurrencyCommands.GetCurrency && e.Command.ArgumentsAsList?.Count == 0) {
                 var currencyForUser = await _currencyDatabaseHandler.GetCurrency(e.Command.ChatMessage.UserId)
                     .ConfigureAwait(false);
 
                 if(currencyForUser.HasValue) {
                     AivaClient.TwitchClient.SendMessage(
-                        channel: Config.ConfigHandler.Config.General.Channel,
+                        channel: ConfigHandler.Config.General.Channel,
                         message: $"@{e.Command.ChatMessage.DisplayName} : You have {currencyForUser.Value} currency!",
                         dryRun: AivaClient.DryRun);
                 }

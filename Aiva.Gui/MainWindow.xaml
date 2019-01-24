@@ -63,7 +63,11 @@
             PaneBackground="#FF444444">
             <controls:HamburgerMenu.ItemsSource>
                 <controls:HamburgerMenuItemCollection>
-                    <controls:HamburgerMenuIconItem Icon="{iconPacks:Material Kind=ViewDashboard}" Label="Dashboard" />
+                    <controls:HamburgerMenuIconItem Icon="{iconPacks:Material Kind=ViewDashboard}" Label="Dashboard">
+                        <controls:HamburgerMenuIconItem.Tag>
+                            <views:Dashboard/>
+                        </controls:HamburgerMenuIconItem.Tag>
+                    </controls:HamburgerMenuIconItem>
 
                     <controls:HamburgerMenuIconItem Icon="{iconPacks:Material Kind=Console}" Label="Console">
                         <controls:HamburgerMenuIconItem.Tag>

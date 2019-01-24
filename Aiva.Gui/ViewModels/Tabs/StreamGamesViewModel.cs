@@ -11,9 +11,9 @@ namespace Aiva.Gui.ViewModels.Tabs {
     [PropertyChanged.AddINotifyPropertyChangedInterface]
     public class StreamGamesViewModel {
         public bool IsBankheistActive {
-            get { return Core.Config.ConfigHandler.Config.StreamGames.Bankheist.General.Active; }
+            get { return Core.ConfigHandler.Config.StreamGames.Bankheist.General.Active; }
             set {
-                Core.Config.ConfigHandler.Config.StreamGames.Bankheist.General.Active = value;
+                Core.ConfigHandler.Config.StreamGames.Bankheist.General.Active = value;
                 if (value)
                     _bankheistHandler.StartGame();
                 else
@@ -23,9 +23,9 @@ namespace Aiva.Gui.ViewModels.Tabs {
         public ICommand ShowBankheistSettingsCommand { get; set; }
 
         public bool IsRouletteActive {
-            get { return Core.Config.ConfigHandler.Config.StreamGames.Roulette.General.Active; }
+            get { return Core.ConfigHandler.Config.StreamGames.Roulette.General.Active; }
             set {
-                Core.Config.ConfigHandler.Config.StreamGames.Roulette.General.Active = value;
+                Core.ConfigHandler.Config.StreamGames.Roulette.General.Active = value;
                 if (value)
                     _rouletteHandler.StartGame();
                 else
@@ -48,11 +48,11 @@ namespace Aiva.Gui.ViewModels.Tabs {
         }
 
         private void StartGames() {
-            if(Core.Config.ConfigHandler.Config.StreamGames.Bankheist.General.Active) {
+            if(Core.ConfigHandler.Config.StreamGames.Bankheist.General.Active) {
                 _bankheistHandler.StartGame();
             }
 
-            if(Core.Config.ConfigHandler.Config.StreamGames.Roulette.General.Active) {
+            if(Core.ConfigHandler.Config.StreamGames.Roulette.General.Active) {
                 _rouletteHandler.StartGame();
             }
         }
@@ -60,7 +60,7 @@ namespace Aiva.Gui.ViewModels.Tabs {
         private async void ShowBankheistSettings() {
             if (Application.Current.MainWindow != null) {
                 var optionsChildWindow = new Views.ChildWindows.BankheistSettings();
-                var currentStateActive = Core.Config.ConfigHandler.Config.StreamGames.Bankheist.General.Active;
+                var currentStateActive = Core.ConfigHandler.Config.StreamGames.Bankheist.General.Active;
 
                 optionsChildWindow.ClosingFinished
                     += (s, args)

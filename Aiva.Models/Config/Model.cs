@@ -180,8 +180,11 @@ namespace Aiva.Models.Config {
             [JsonProperty("TwitchClientID")]
             public string TwitchClientID { get; set; }
 
-            [JsonProperty("TwitchOAuth")]
-            public string TwitchOAuth { get; set; }
+            [JsonProperty("BotOAuthToken")]
+            public string BotOAuthToken { get; set; }
+
+            [JsonProperty("StreamerOAuthToken")]
+            public string StreamerOAuthToken { get; set; }
         }
 
         public partial class Chat {

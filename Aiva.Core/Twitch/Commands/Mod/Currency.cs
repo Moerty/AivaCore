@@ -28,15 +28,15 @@ namespace Aiva.Core.Twitch.Commands.Mod {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         public void CommandReceived(object sender, OnChatCommandReceivedArgs e) {
-            if (Config.ConfigHandler.Config.ModCommands.ModCurrency.AddCurrency == e.Command.CommandText) {
+            if (ConfigHandler.Config.ModCommands.ModCurrency.AddCurrency == e.Command.CommandText) {
                 Add.ChatCommandReceived(sender, e);
             }
 
-            if (Config.ConfigHandler.Config.ModCommands.ModCurrency.RemoveCurrency == e.Command.CommandText) {
+            if (ConfigHandler.Config.ModCommands.ModCurrency.RemoveCurrency == e.Command.CommandText) {
                 Remove.ChatCommandReceived(sender, e);
             }
 
-            if (Config.ConfigHandler.Config.ModCommands.ModCurrency.TransferCurrency == e.Command.CommandText) {
+            if (ConfigHandler.Config.ModCommands.ModCurrency.TransferCurrency == e.Command.CommandText) {
                 Transfer.ChatCommandReceived(sender, e);
             }
 
@@ -60,7 +60,7 @@ namespace Aiva.Core.Twitch.Commands.Mod {
 
                     if (currency.HasValue) {
                         AivaClient.TwitchClient.SendMessage(
-                            Config.ConfigHandler.Config.General.Channel,
+                            ConfigHandler.Config.General.Channel,
                             $"@{e.Command.ChatMessage.DisplayName}: Viewer {e.Command.ArgumentsAsList[0]} has {currency.Value} currency!",
                             AivaClient.DryRun);
                     }
@@ -125,7 +125,7 @@ namespace Aiva.Core.Twitch.Commands.Mod {
 
                 if (result) {
                     AivaClient.TwitchClient.SendMessage(
-                        Config.ConfigHandler.Config.General.Channel,
+                        ConfigHandler.Config.General.Channel,
                         $"@{senderName} : {username} added {value} currency!");
                 }
             }
@@ -178,7 +178,7 @@ namespace Aiva.Core.Twitch.Commands.Mod {
 
                 if (result) {
                     AivaClient.TwitchClient.SendMessage(
-                        Config.ConfigHandler.Config.General.Channel,
+                        ConfigHandler.Config.General.Channel,
                         $"@{senderName} : Transfer {value} currency from {username1} to {username2}");
                 }
             }
@@ -220,7 +220,7 @@ namespace Aiva.Core.Twitch.Commands.Mod {
 
                 if (result) {
                     AivaClient.TwitchClient.SendMessage(
-                        Config.ConfigHandler.Config.General.Channel,
+                        ConfigHandler.Config.General.Channel,
                         $"@{senderName} : {username} removed {value} currency!");
                 }
             }

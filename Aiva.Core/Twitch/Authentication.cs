@@ -157,7 +157,7 @@ namespace Aiva.Core.Twitch {
             sb.Append("?response_type=token");
             sb.Append("&client_id=").Append(ClientID);
             sb.Append("&redirect_uri=").Append(ReturnUrl);
-            sb.Append("&scope=user_read+user_blocks_edit+user_blocks_read+user_follows_edit+channel_read+channel_editor+channel_commercial+channel_stream+channel_subscriptions+user_subscriptions+channel_check_subscription+chat_login+channel_feed_read+channel_feed_edit");
+            sb.Append("&scope=user_read+user_blocks_edit+user_blocks_read+user_follows_edit+channel_read+channel_editor+channel_commercial+channel_stream+channel_subscriptions+user_subscriptions+channel_check_subscription+chat_login+channel_feed_read+channel_feed_edit+user:edit:broadcast");
             return sb.ToString();
         }
     }

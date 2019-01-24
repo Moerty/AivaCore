@@ -18,18 +18,18 @@ namespace Aiva.Core.Twitch {
 
         public AivaClient() {
             TwitchApi = new TwitchAPI();
-            TwitchApi.Settings.ClientId = Config.ConfigHandler.Config.Credentials.TwitchClientID;
-            TwitchApi.Settings.AccessToken = Config.ConfigHandler.Config.Credentials.TwitchOAuth;
+            TwitchApi.Settings.ClientId = ConfigHandler.Config.Credentials.TwitchClientID;
+            TwitchApi.Settings.AccessToken = ConfigHandler.Config.Credentials.BotOAuthToken;
 
             var credentials = new ConnectionCredentials(
-                Config.ConfigHandler.Config.General.BotName,
-                Config.ConfigHandler.Config.Credentials.TwitchOAuth);
+                ConfigHandler.Config.General.BotName,
+                ConfigHandler.Config.Credentials.BotOAuthToken);
 
             TwitchClient = new TwitchClient();
             TwitchClient.Initialize(
                 credentials: credentials,
-                channel: Config.ConfigHandler.Config.General.Channel,
-                chatCommandIdentifier: Convert.ToChar(Config.ConfigHandler.Config.General.CommandIdentifier),
+                channel: ConfigHandler.Config.General.Channel,
+                chatCommandIdentifier: Convert.ToChar(ConfigHandler.Config.General.CommandIdentifier),
                 whisperCommandIdentifier: '@',
                 autoReListenOnExceptions: true);
 
@@ -40,7 +40,7 @@ namespace Aiva.Core.Twitch {
 
         private void OnJoinedChannel(object sender, OnJoinedChannelArgs e) {
             TwitchClient.SendMessage(
-                Config.ConfigHandler.Config.General.Channel,
+                ConfigHandler.Config.General.Channel,
                 "Aiva started, hi at all!",
                 DryRun);
 
@@ -48,7 +48,7 @@ namespace Aiva.Core.Twitch {
         }
 
         private async void GetChannelBadges() {
-            Badges = await TwitchApi.V5.Chat.GetChatBadgesByChannelAsync(Core.Config.ConfigHandler.Config.General.ChannelID);
+            Badges = await TwitchApi.V5.Chat.GetChatBadgesByChannelAsync(Core.ConfigHandler.Config.General.ChannelID);
         }
 
         public static async Task<TwitchLib.Api.V5.Models.Users.User> GetChannelDetails(string oAuthToken, string channel) {

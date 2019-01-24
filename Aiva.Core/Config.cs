@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace Aiva.Core.Config {
+namespace Aiva.Core {
     public class ConfigHandler {
         public static Models.Config.Model.Root Config { get; private set; }
 
-        public ConfigHandler(string clientId = "", string oauthToken = "", string botName = "", string channel = "", string channelId = "") {
+        public ConfigHandler(string clientId = "", string botOauthToken = "", string botName = "", string channel = "", string channelId = "", string streamerOAuthToken = "") {
             if(File.Exists(GetConfigPath())) {
                 Config = Models.Config.Model.Root.FromJson(
                     File.ReadAllText(GetConfigPath()));
@@ -21,7 +21,8 @@ namespace Aiva.Core.Config {
                 Config.General.BotName = botName;
                 Config.General.Channel = channel;
                 Config.Credentials.TwitchClientID = clientId;
-                Config.Credentials.TwitchOAuth = oauthToken;
+                Config.Credentials.BotOAuthToken = botOauthToken;
+                Config.Credentials.StreamerOAuthToken = streamerOAuthToken;
                 Config.General.ChannelID = channelId;
 
                 SaveConfig();

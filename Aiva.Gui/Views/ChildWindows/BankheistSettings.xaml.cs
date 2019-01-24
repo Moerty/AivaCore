@@ -19,7 +19,7 @@ namespace Aiva.Gui.Views.ChildWindows {
         private readonly ViewModels.ChildWindows.BankheistSettingsViewModel _viewModel;
         public BankheistSettings() {
             InitializeComponent();
-            _viewModel = new ViewModels.ChildWindows.BankheistSettingsViewModel(Core.Config.ConfigHandler.Config.StreamGames.Bankheist.General.Active);
+            _viewModel = new ViewModels.ChildWindows.BankheistSettingsViewModel(Core.ConfigHandler.Config.StreamGames.Bankheist.General.Active);
             this.DataContext = _viewModel;
         }
 

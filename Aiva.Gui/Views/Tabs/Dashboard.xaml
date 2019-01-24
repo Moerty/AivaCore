@@ -8,6 +8,7 @@
     xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:mvvm="clr-namespace:Aiva.Gui.ViewModels.Tabs"
+    xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
     Width="800"
     Height="400"
     d:DataContext="{d:DesignInstance d:Type=mvvm:Dashboard}"
@@ -17,8 +18,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="35"/>
             <RowDefinition Height="251*"/>
-            <RowDefinition Height="60"/>
-            <RowDefinition Height="137*"/>
+            <RowDefinition Height="190"/>
         </Grid.RowDefinitions>
 
         <Grid Name="StaticOptionGrid" Grid.Row="0">
@@ -29,7 +29,7 @@
                     Content="Current Viewers"
                     Focusable="False"
                     GroupName="Options"
-                    IsChecked="{Binding IsOptionsStaticCurrentViewerActive}"/>
+                    IsChecked="{Binding IsTotalViewersGraphActive}"/>
 
                 <RadioButton
                     Name="TotalFollowers"
@@ -50,17 +50,25 @@
                     Series="{Binding CurrentViewersSeries}">
                     <lvc:CartesianChart.AxisX>
                         <!--  a small visual improvement, lets hide the first points (x = 0, x=1) to get better animations  -->
-                        <lvc:Axis MinValue="0"/>
+                        <lvc:Axis MinValue="0" Labels="">
+                            <!--<lvc:Axis.Separator>
+                                <lvc:Separator Step=""/>
+                            </lvc:Axis.Separator>-->
+                        </lvc:Axis>
                     </lvc:CartesianChart.AxisX>
                     <lvc:CartesianChart.AxisY>
-                        <lvc:Axis Title="Users" MinValue="0"/>
+                        <lvc:Axis Title="Users" MinValue="0">
+                            <lvc:Axis.Separator>
+                                <lvc:Separator Step="1"/>
+                            </lvc:Axis.Separator>
+                        </lvc:Axis>
                     </lvc:CartesianChart.AxisY>
                 </lvc:CartesianChart>
                 <Grid.Style>
                     <Style TargetType="Grid">
                         <Setter Property="Visibility" Value="Hidden"/>
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding IsOptionsStaticCurrentViewerActive}" Value="True">
+                            <DataTrigger Binding="{Binding IsTotalViewersGraphActive}" Value="True">
                                 <Setter Property="Visibility" Value="Visible"/>
                             </DataTrigger>
                         </Style.Triggers>
@@ -95,6 +103,7 @@
                 </Grid.Style>
             </Grid>
         </Grid>
+
         <Grid Name="StreamOptionsGrid" Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50*"/>
@@ -107,76 +116,48 @@
                         <controls:SplitButton
                             HorizontalContentAlignment="Left"
                             Command="{Binding ChangeGameCommand}"
-                            DisplayMemberPath="Name"
-                            Icon="{DynamicResource gamepad-variant}"
-                            ItemsSource="{Binding Games}"
+                            Icon="{iconPacks:FontAwesome Kind=GamepadSolid}"
+                            ItemsSource="{Binding StreamGames}"
                             SelectedItem="{Binding SelectedGame, FallbackValue='You want to play a game?'}"
-                            SelectedValuePath="Name"
                             ToolTip="Press the button to change the game"/>
                         <TextBox
                             Margin="0,3,0,0"
-                            controls:TextBoxHelper.ClearTextButton="True"
+                            controls:TextBoxHelper.TextButton="True"
+                            Style="{DynamicResource MetroButtonTextBox}"
+                            controls:TextBoxHelper.ButtonContent="{iconPacks:FontAwesome Kind=GamepadSolid}"
+                            controls:TextBoxHelper.ButtonCommand="{Binding ChangeStreamTitleCommand}"
+                            ToolTip="Press the button to change the stream title"
                             controls:TextBoxHelper.Watermark="Stream Title"
-                            Text="{Binding StreamTitle}"/>
-                    </StackPanel>
+                            Text="{Binding StreamTitle, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                        </TextBox>
 
-                    <Button
-                        Width="45"
-                        Height="45"
-                        Margin="2"
-                        Command="{Binding UpdateStreamTitleCommand}"
-                        Style="{DynamicResource MetroCircleButtonStyle}">
-                        <Rectangle
-                            Width="24"
-                            Height="24"
-                            Visibility="Visible">
-                            <Rectangle.Fill>
-                                <VisualBrush Stretch="Uniform" Visual="{StaticResource update}"/>
-                            </Rectangle.Fill>
-                        </Rectangle>
-                    </Button>
+                        <controls:SplitButton
+                            Margin="0,3,0,0"
+                            HorizontalContentAlignment="Left"
+                            Command="{Binding ShowCommercialCommand}"
+                            Icon="{iconPacks:FontAwesome Kind=AdversalBrands}"
+                            ItemsSource="{Binding CommercialTypes}"
+                            SelectedItem="{Binding SelectedCommercial, FallbackValue='Some commercial maybe?'}"
+                            ToolTip="Press the button to change the game"/>
+
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Total Views: "/>
+                            <TextBlock Text="{Binding TotalViews, FallbackValue=0}"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Total Followers: "/>
+                            <TextBlock Text="{Binding TotalFollowers, FallbackValue=0}"/>
+                        </StackPanel>
+
+                    </StackPanel>
                 </StackPanel>
             </Grid>
 
             <Grid Grid.Column="1">
-                <DockPanel HorizontalAlignment="Stretch">
-                    <Button
-                        Width="45"
-                        Height="45"
-                        Margin="2"
-                        Command="{Binding ShowCommercialFlyoutCommand}"
-                        Style="{DynamicResource MetroCircleButtonStyle}"
-                        ToolTip="Show Commercial">
-                        <Rectangle
-                            Width="24"
-                            Height="24"
-                            ToolTip="Show Commercial"
-                            Visibility="Visible">
-                            <Rectangle.Fill>
-                                <VisualBrush Stretch="Uniform" Visual="{StaticResource clover}"/>
-                            </Rectangle.Fill>
-                        </Rectangle>
-                    </Button>
-                </DockPanel>
-            </Grid>
-        </Grid>
-        <Grid Name="StreamLog" Grid.Row="3">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="50*"/>
-                <ColumnDefinition Width="50*"/>
-            </Grid.ColumnDefinitions>
-
-            <Grid Grid.Column="0">
-                <StackPanel Margin="10" Orientation="Vertical">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Total Views: "/>
-                        <TextBlock Text="{Binding TotalViews, FallbackValue=123}"/>
-                    </StackPanel>
-
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Total Followers: "/>
-                        <TextBlock Text="{Binding TotalFollowers, FallbackValue=123}"/>
-                    </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <controls:ToggleSwitch HorizontalAlignment="Left" IsChecked="{Binding SlowMode}" Header="Slow mode"/>
+                    <controls:ToggleSwitch HorizontalAlignment="Left" IsChecked="{Binding SubsOnly}" Header="Subs only"/>
                 </StackPanel>
             </Grid>
         </Grid>

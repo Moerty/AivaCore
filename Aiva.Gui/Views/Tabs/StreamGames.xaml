@@ -17,11 +17,13 @@
         VerticalAlignment="Top">
         <userControls:StreamGameUserControl
             DockPanel.Dock="Left"
+            GameName="Bankheist"
             IsActive="{Binding IsBankheistActive, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             ShowSettingsCommand="{Binding ShowBankheistSettingsCommand}" />
 
         <userControls:StreamGameUserControl
             DockPanel.Dock="Right"
+            GameName="Roulette"
             IsActive="{Binding IsRouletteActive, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             ShowSettingsCommand="{Binding ShowRouletteSettingsCommand}" />
     </DockPanel>

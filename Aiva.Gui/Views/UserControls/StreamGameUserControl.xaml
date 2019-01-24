@@ -12,12 +12,11 @@
     <Grid>
         <Border BorderBrush="Black" BorderThickness="1">
             <StackPanel Orientation="Vertical">
-                <TextBlock Text="{Binding ElementName=root, Path=GameName}" />
                 <StackPanel Orientation="Horizontal">
                     <controls:ToggleSwitch
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
-                        Header="Bankheist"
+                        Header="{Binding ElementName=root, Path=GameName}"
                         IsChecked="{Binding ElementName=root, Path=IsActive}" />
                     <Button
                         Width="50"

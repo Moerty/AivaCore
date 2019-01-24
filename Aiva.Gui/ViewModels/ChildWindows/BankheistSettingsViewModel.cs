@@ -16,34 +16,34 @@ namespace Aiva.Gui.ViewModels.ChildWindows {
 
         private void LoadPropertiesFromConfig() {
             Properties = new Models.StreamGames.Bankheist.Properties {
-                Command = Core.Config.ConfigHandler.Config.StreamGames.Bankheist.General.Command,
-                BankheistCooldown = (int)Core.Config.ConfigHandler.Config.StreamGames.Bankheist.Cooldowns.BankheistCooldown,
-                BankheistDuration = (int)Core.Config.ConfigHandler.Config.StreamGames.Bankheist.Cooldowns.BankheistDuration,
+                Command = Core.ConfigHandler.Config.StreamGames.Bankheist.General.Command,
+                BankheistCooldown = (int)Core.ConfigHandler.Config.StreamGames.Bankheist.Cooldowns.BankheistCooldown,
+                BankheistDuration = (int)Core.ConfigHandler.Config.StreamGames.Bankheist.Cooldowns.BankheistDuration,
 
-                MinUserBank1 = Core.Config.ConfigHandler.Config.StreamGames.Bankheist.Settings.Bank1.MinimumPlayers,
-                SuccessRateBank1 = Core.Config.ConfigHandler.Config.StreamGames.Bankheist.Settings.Bank1.SuccessRate,
-                WinningMultiplierBank1 = Core.Config.ConfigHandler.Config.StreamGames.Bankheist.Settings.Bank1.WinningMultiplier,
+                MinUserBank1 = Core.ConfigHandler.Config.StreamGames.Bankheist.Settings.Bank1.MinimumPlayers,
+                SuccessRateBank1 = Core.ConfigHandler.Config.StreamGames.Bankheist.Settings.Bank1.SuccessRate,
+                WinningMultiplierBank1 = Core.ConfigHandler.Config.StreamGames.Bankheist.Settings.Bank1.WinningMultiplier,
 
-                MinUserBank2 = Core.Config.ConfigHandler.Config.StreamGames.Bankheist.Settings.Bank2.MinimumPlayers,
-                SuccessRateBank2 = Core.Config.ConfigHandler.Config.StreamGames.Bankheist.Settings.Bank2.SuccessRate,
-                WinningMultiplierBank2 = Core.Config.ConfigHandler.Config.StreamGames.Bankheist.Settings.Bank2.WinningMultiplier,
+                MinUserBank2 = Core.ConfigHandler.Config.StreamGames.Bankheist.Settings.Bank2.MinimumPlayers,
+                SuccessRateBank2 = Core.ConfigHandler.Config.StreamGames.Bankheist.Settings.Bank2.SuccessRate,
+                WinningMultiplierBank2 = Core.ConfigHandler.Config.StreamGames.Bankheist.Settings.Bank2.WinningMultiplier,
 
-                MinUserBank3 = Core.Config.ConfigHandler.Config.StreamGames.Bankheist.Settings.Bank3.MinimumPlayers,
-                SuccessRateBank3 = Core.Config.ConfigHandler.Config.StreamGames.Bankheist.Settings.Bank3.SuccessRate,
-                WinningMultiplierBank3 = Core.Config.ConfigHandler.Config.StreamGames.Bankheist.Settings.Bank3.WinningMultiplier,
+                MinUserBank3 = Core.ConfigHandler.Config.StreamGames.Bankheist.Settings.Bank3.MinimumPlayers,
+                SuccessRateBank3 = Core.ConfigHandler.Config.StreamGames.Bankheist.Settings.Bank3.SuccessRate,
+                WinningMultiplierBank3 = Core.ConfigHandler.Config.StreamGames.Bankheist.Settings.Bank3.WinningMultiplier,
 
-                MinUserBank4 = Core.Config.ConfigHandler.Config.StreamGames.Bankheist.Settings.Bank4.MinimumPlayers,
-                SuccessRateBank4 = Core.Config.ConfigHandler.Config.StreamGames.Bankheist.Settings.Bank4.SuccessRate,
-                WinningMultiplierBank4 = Core.Config.ConfigHandler.Config.StreamGames.Bankheist.Settings.Bank4.WinningMultiplier,
+                MinUserBank4 = Core.ConfigHandler.Config.StreamGames.Bankheist.Settings.Bank4.MinimumPlayers,
+                SuccessRateBank4 = Core.ConfigHandler.Config.StreamGames.Bankheist.Settings.Bank4.SuccessRate,
+                WinningMultiplierBank4 = Core.ConfigHandler.Config.StreamGames.Bankheist.Settings.Bank4.WinningMultiplier,
 
-                MinUserBank5 = Core.Config.ConfigHandler.Config.StreamGames.Bankheist.Settings.Bank5.MinimumPlayers,
-                SuccessRateBank5 = Core.Config.ConfigHandler.Config.StreamGames.Bankheist.Settings.Bank5.SuccessRate,
-                WinningMultiplierBank5 = Core.Config.ConfigHandler.Config.StreamGames.Bankheist.Settings.Bank5.WinningMultiplier,
+                MinUserBank5 = Core.ConfigHandler.Config.StreamGames.Bankheist.Settings.Bank5.MinimumPlayers,
+                SuccessRateBank5 = Core.ConfigHandler.Config.StreamGames.Bankheist.Settings.Bank5.SuccessRate,
+                WinningMultiplierBank5 = Core.ConfigHandler.Config.StreamGames.Bankheist.Settings.Bank5.WinningMultiplier,
             };
         }
 
         public void SafePropertiesToConfig() {
-            Core.Config.ConfigHandler.Config.StreamGames.Bankheist = new Models.Config.Model.Bankheist {
+            Core.ConfigHandler.Config.StreamGames.Bankheist = new Models.Config.Model.Bankheist {
                 General = new Models.Config.Model.PurpleGeneral {
                     Active = _bankheistActive,
                     Command = Properties.Command.TrimEnd('!')

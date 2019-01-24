@@ -44,7 +44,7 @@ namespace Aiva.Extensions.StreamGames {
             while (_isActive) {
                 AivaClient.TwitchClient
                     .SendMessage(
-                        Core.Config.ConfigHandler.Config.General.Channel,
+                        Core.ConfigHandler.Config.General.Channel,
                         "Roulette started",
                         AivaClient.DryRun);
 
@@ -55,7 +55,7 @@ namespace Aiva.Extensions.StreamGames {
 
                 AivaClient.TwitchClient
                     .SendMessage(
-                        Core.Config.ConfigHandler.Config.General.Channel,
+                        Core.ConfigHandler.Config.General.Channel,
                         "Roulette closed",
                         AivaClient.DryRun);
 
@@ -82,7 +82,7 @@ namespace Aiva.Extensions.StreamGames {
 
                 if (stringBuilder.ToString().Any()) {
                     AivaClient.TwitchClient.SendMessage(
-                        Core.Config.ConfigHandler.Config.General.Channel,
+                        Core.ConfigHandler.Config.General.Channel,
                         stringBuilder.ToString(),
                         AivaClient.DryRun);
                 }

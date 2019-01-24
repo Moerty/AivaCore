@@ -77,7 +77,7 @@ namespace Aiva.Core.Database.Functions {
                         .ConfigureAwait(false);
 
                     foreach (var user in activeUsers) {
-                        user.Users.Currency.Value += Convert.ToInt64(Core.Config.ConfigHandler.Config.Currency.CurrencyToAddFrequently);
+                        user.Users.Currency.Value += Convert.ToInt64(ConfigHandler.Config.Currency.CurrencyToAddFrequently);
                     }
 
                     await context.SaveChangesAsync()

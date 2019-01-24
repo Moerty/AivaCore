@@ -17,16 +17,22 @@ namespace Aiva.Gui.Views.Windows {
     /// Interaktionslogik für SetupWindow.xaml
     /// </summary>
     public partial class SetupWindow : MetroWindow {
+        private readonly ViewModels.Windows.SetupWindowViewModel _vm;
         public SetupWindow() {
             InitializeComponent();
-        }
 
-        private void ConfirmButton_Click(object sender, RoutedEventArgs e) {
-            if(!string.IsNullOrEmpty(ClientId.Text) && !string.IsNullOrEmpty(Channel.Text) && !string.IsNullOrEmpty(Botname.Text)) {
-                ConfirmValues?.Invoke(this, new Models.Gui.Windows.ConfirmSetupModel { ClientId = ClientId.Text, Channel = Channel.Text, Botname = Botname.Text });
-            }
-        }
+            _vm = new ViewModels.Windows.SetupWindowViewModel();
+            _vm.ShowMessageBox
+                += (s, e)
+                => MessageBox.Show(e);
 
-        public EventHandler<Models.Gui.Windows.ConfirmSetupModel> ConfirmValues;
+            _vm.CloseSetupPage
+                += (s, e)
+                => this.Close();
+
+            this.DataContext = _vm;
+
+            MessageBox.Show("Login in Twitch with your Botaccount");
+        }
     }
 }
