@@ -17,8 +17,9 @@
     </controls:MetroContentControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
             <RowDefinition Height="50" />
-            <RowDefinition Height="80" />
+            <RowDefinition Height="50" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -31,9 +32,9 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
 
-                <ToggleButton Grid.Column="0" IsChecked="{Binding PermitStuff, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                <ToggleButton Focusable="False" Grid.Column="0" IsChecked="{Binding PermitStuff, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
                     <ToggleButton.Style>
-                        <Style TargetType="ToggleButton">
+                        <Style TargetType="ToggleButton" BasedOn="{StaticResource MahApps.Metro.Styles.MetroToggleButton}">
                             <Style.Triggers>
                                 <Trigger Property="IsChecked" Value="False">
                                     <Setter Property="Content">
@@ -63,9 +64,9 @@
                     </ToggleButton.Style>
                 </ToggleButton>
 
-                <ToggleButton Grid.Column="1" IsChecked="{Binding PermitAdmin, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                <ToggleButton Focusable="False" Grid.Column="1" IsChecked="{Binding PermitAdmin, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
                     <ToggleButton.Style>
-                        <Style TargetType="ToggleButton">
+                        <Style TargetType="ToggleButton" BasedOn="{StaticResource MahApps.Metro.Styles.MetroToggleButton}">
                             <Style.Triggers>
                                 <Trigger Property="IsChecked" Value="False">
                                     <Setter Property="Content">
@@ -95,9 +96,9 @@
                     </ToggleButton.Style>
                 </ToggleButton>
 
-                <ToggleButton Grid.Column="2" IsChecked="{Binding PermitMods, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                <ToggleButton Focusable="False" Grid.Column="2" IsChecked="{Binding PermitMods, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
                     <ToggleButton.Style>
-                        <Style TargetType="ToggleButton">
+                        <Style TargetType="ToggleButton" BasedOn="{StaticResource MahApps.Metro.Styles.MetroToggleButton}">
                             <Style.Triggers>
                                 <Trigger Property="IsChecked" Value="False">
                                     <Setter Property="Content">
@@ -127,9 +128,9 @@
                     </ToggleButton.Style>
                 </ToggleButton>
 
-                <ToggleButton Grid.Column="3" IsChecked="{Binding PermitViewers, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                <ToggleButton Focusable="False" Grid.Column="3" IsChecked="{Binding PermitViewers, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
                     <ToggleButton.Style>
-                        <Style TargetType="ToggleButton">
+                        <Style TargetType="ToggleButton" BasedOn="{StaticResource MahApps.Metro.Styles.MetroToggleButton}">
                             <Style.Triggers>
                                 <Trigger Property="IsChecked" Value="False">
                                     <Setter Property="Content">
@@ -175,6 +176,7 @@
             </Grid.ColumnDefinitions>
 
             <RadioButton
+                Focusable="False"
                 Grid.Column="0"
                 HorizontalContentAlignment="Center"
                 VerticalContentAlignment="Center"
@@ -196,6 +198,7 @@
             </RadioButton>
 
             <RadioButton
+                Focusable="False"
                 Grid.Column="1"
                 HorizontalContentAlignment="Center"
                 VerticalContentAlignment="Center"
@@ -217,6 +220,7 @@
             </RadioButton>
 
             <RadioButton
+                Focusable="False"
                 Grid.Column="2"
                 HorizontalContentAlignment="Center"
                 VerticalContentAlignment="Center"
@@ -245,13 +249,7 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <StackPanel Grid.Column="0" Orientation="Vertical">
-                <StackPanel.Resources>
-                    <Style TargetType="{x:Type StackPanel}">
-                        <Setter Property="Margin" Value="0,10,0,10" />
-                    </Style>
-                </StackPanel.Resources>
-
+            <Grid Grid.Column="1" Name="SliderValueGrid">
                 <StackPanel Margin="0,0,0,10" Orientation="Vertical">
                     <TextBlock Text="{Binding ElementName=activeTimeSlider, Path=Value, Converter={StaticResource timeConverter}}" />
                     <Slider
@@ -259,7 +257,7 @@
                         Maximum="240"
                         Minimum="1">
                         <Slider.Style>
-                            <Style TargetType="Slider">
+                            <Style TargetType="Slider" BasedOn="{StaticResource MahApps.Metro.Styles.Slider}">
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding WithActiveTime}" Value="True">
                                         <Setter Property="IsEnabled" Value="True" />
@@ -272,182 +270,210 @@
                         </Slider.Style>
                     </Slider>
                 </StackPanel>
+            </Grid>
 
+            <Grid Grid.Column="2">
+                <TextBox controls:TextBoxHelper.AutoWatermark="True" controls:TextBoxHelper.Watermark="Enter keyword ...">
+                    <TextBox.Style>
+                        <Style BasedOn="{StaticResource MetroTextBox}" TargetType="TextBox">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding WithKeyword}" Value="True">
+                                    <Setter Property="IsEnabled" Value="True" />
+                                    <Setter Property="BorderThickness" Value="1" />
+                                    <Setter Property="BorderBrush" Value="Red"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding WithKeyword}" Value="False">
+                                    <Setter Property="IsEnabled" Value="False" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBox.Style>
+                </TextBox>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            
+
+        
+
+        <StackPanel Grid.Column="0" Orientation="Vertical">
+            <StackPanel.Resources>
+                <Style TargetType="{x:Type StackPanel}">
+                    <Setter Property="Margin" Value="0,0,0,10" />
+                </Style>
+            </StackPanel.Resources>
+
+
+
+            <Separator />
+
+            <StackPanel Orientation="Vertical">
+
+                <CheckBox IsChecked="{Binding IsCaseSensitive}">
+                    <CheckBox.Style>
+                        <Style BasedOn="{StaticResource MetroCheckBox}" TargetType="CheckBox">
+                            <Style.Triggers>
+                                <Trigger Property="IsChecked" Value="True">
+                                    <Setter Property="Content" Value="Case sensitive" />
+                                </Trigger>
+                                <Trigger Property="IsChecked" Value="False">
+                                    <Setter Property="Content" Value="Not case sensitive" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </CheckBox.Style>
+                </CheckBox>
                 <Separator />
-
-                <StackPanel Orientation="Vertical">
-                    <TextBox controls:TextBoxHelper.AutoWatermark="True" controls:TextBoxHelper.Watermark="Enter keyword ...">
-                        <TextBox.Style>
-                            <Style BasedOn="{StaticResource MetroTextBox}" TargetType="TextBox">
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding WithKeyword}" Value="True">
-                                        <Setter Property="IsEnabled" Value="True" />
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding WithKeyword}" Value="False">
-                                        <Setter Property="IsEnabled" Value="False" />
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </TextBox.Style>
-                    </TextBox>
-                    <CheckBox IsChecked="{Binding IsCaseSensitive}">
-                        <CheckBox.Style>
-                            <Style BasedOn="{StaticResource MetroCheckBox}" TargetType="CheckBox">
-                                <Style.Triggers>
-                                    <Trigger Property="IsChecked" Value="True">
-                                        <Setter Property="Content" Value="Case sensitive" />
-                                    </Trigger>
-                                    <Trigger Property="IsChecked" Value="False">
-                                        <Setter Property="Content" Value="Not case sensitive" />
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </CheckBox.Style>
-                    </CheckBox>
-                    <Separator />
-                    <CheckBox IsChecked="{Binding IsKeywordAntispamActive}">
-                        <CheckBox.Style>
-                            <Style BasedOn="{StaticResource MetroCheckBox}" TargetType="CheckBox">
-                                <Style.Triggers>
-                                    <Trigger Property="IsChecked" Value="True">
-                                        <Setter Property="Content" Value="Keyword antispam" />
-                                    </Trigger>
-                                    <Trigger Property="IsChecked" Value="False">
-                                        <Setter Property="Content" Value="Spam keyword" />
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </CheckBox.Style>
-                    </CheckBox>
-                    <Separator />
-                    <CheckBox IsChecked="{Binding UncheckWinner}">
-                        <CheckBox.Style>
-                            <Style BasedOn="{StaticResource MetroCheckBox}" TargetType="CheckBox">
-                                <Style.Triggers>
-                                    <Trigger Property="IsChecked" Value="True">
-                                        <Setter Property="Content" Value="Remove winner from list" />
-                                    </Trigger>
-                                    <Trigger Property="IsChecked" Value="False">
-                                        <Setter Property="Content" Value="Don't remove winner from list" />
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </CheckBox.Style>
-                    </CheckBox>
-                    <Separator />
-                    <CheckBox IsChecked="{Binding AnnounceWinner}">
-                        <CheckBox.Style>
-                            <Style BasedOn="{StaticResource MetroCheckBox}" TargetType="CheckBox">
-                                <Style.Triggers>
-                                    <Trigger Property="IsChecked" Value="True">
-                                        <Setter Property="Content" Value="Announce winner" />
-                                    </Trigger>
-                                    <Trigger Property="IsChecked" Value="False">
-                                        <Setter Property="Content" Value="Don't announce winner" />
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </CheckBox.Style>
-                    </CheckBox>
-                    <Separator />
-                </StackPanel>
+                <CheckBox IsChecked="{Binding IsKeywordAntispamActive}">
+                    <CheckBox.Style>
+                        <Style BasedOn="{StaticResource MetroCheckBox}" TargetType="CheckBox">
+                            <Style.Triggers>
+                                <Trigger Property="IsChecked" Value="True">
+                                    <Setter Property="Content" Value="Keyword antispam" />
+                                </Trigger>
+                                <Trigger Property="IsChecked" Value="False">
+                                    <Setter Property="Content" Value="Spam keyword" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </CheckBox.Style>
+                </CheckBox>
+                <Separator />
+                <CheckBox IsChecked="{Binding UncheckWinner}">
+                    <CheckBox.Style>
+                        <Style BasedOn="{StaticResource MetroCheckBox}" TargetType="CheckBox">
+                            <Style.Triggers>
+                                <Trigger Property="IsChecked" Value="True">
+                                    <Setter Property="Content" Value="Remove winner from list" />
+                                </Trigger>
+                                <Trigger Property="IsChecked" Value="False">
+                                    <Setter Property="Content" Value="Don't remove winner from list" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </CheckBox.Style>
+                </CheckBox>
+                <Separator />
+                <CheckBox IsChecked="{Binding AnnounceWinner}">
+                    <CheckBox.Style>
+                        <Style BasedOn="{StaticResource MetroCheckBox}" TargetType="CheckBox">
+                            <Style.Triggers>
+                                <Trigger Property="IsChecked" Value="True">
+                                    <Setter Property="Content" Value="Announce winner" />
+                                </Trigger>
+                                <Trigger Property="IsChecked" Value="False">
+                                    <Setter Property="Content" Value="Don't announce winner" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </CheckBox.Style>
+                </CheckBox>
+                <Separator />
             </StackPanel>
+        </StackPanel>
 
-            <Grid Grid.Column="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="50" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
 
-                <Grid Grid.Row="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="30" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-                    <Button
+                <Button
                         Grid.Column="0"
                         Content="{iconPacks:FontAwesome Kind=UndoSolid}"
                         Focusable="False" />
 
-                    <Button
+                <Button
                         Grid.Column="1"
                         BorderBrush="LightGreen"
                         Content="{iconPacks:FontAwesome Kind=DiceSolid}"
                         Focusable="False" />
-                </Grid>
+            </Grid>
 
-                <Grid Grid.Row="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="30" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
 
-                    <Grid Grid.Row="0">
-                        <TextBlock
+                <Grid Grid.Row="0">
+                    <TextBlock
                             FontSize="20"
                             FontStyle="Oblique"
                             Text="Winner" />
-                    </Grid>
+                </Grid>
 
-                    <Grid Grid.Row="1">
-                        <Ellipse Width="150" Height="150">
-                            <Ellipse.Fill>
-                                <ImageBrush ImageSource="https://pbs.twimg.com/media/BnQRhIGCEAA_Gnl.jpg" />
-                            </Ellipse.Fill>
-                        </Ellipse>
-                    </Grid>
+                <Grid Grid.Row="1">
+                    <Ellipse Width="150" Height="150">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="https://pbs.twimg.com/media/BnQRhIGCEAA_Gnl.jpg" />
+                        </Ellipse.Fill>
+                    </Ellipse>
                 </Grid>
             </Grid>
+        </Grid>
 
-            <StackPanel Grid.Column="2" Orientation="Vertical">
-                <StackPanel.Resources>
-                    <Style TargetType="{x:Type StackPanel}">
-                        <Setter Property="Margin" Value="0,10,0,10" />
-                    </Style>
-                </StackPanel.Resources>
+        <StackPanel Grid.Column="2" Orientation="Vertical">
+            <StackPanel.Resources>
+                <Style TargetType="{x:Type StackPanel}">
+                    <Setter Property="Margin" Value="0,10,0,10" />
+                </Style>
+            </StackPanel.Resources>
 
-                <StackPanel Margin="0,0,0,10" Orientation="Vertical">
-                    <TextBlock Text="Min bits" />
-                    <Slider
+            <StackPanel Margin="0,0,0,10" Orientation="Vertical">
+                <TextBlock Text="Min bits" />
+                <Slider
                         Maximum="100000"
                         Minimum="0"
                         Ticks="0,1,100,1000,10000,100000"
                         Value="{Binding Currency}" />
-                </StackPanel>
+            </StackPanel>
 
-                <Separator />
+            <Separator />
 
-                <StackPanel Orientation="Vertical">
-                    <TextBlock Text="Subscribed time" />
-                    <Slider
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="Subscribed time" />
+                <Slider
                         Maximum="24"
                         Minimum="0"
                         Ticks="0,1,3,6,12,24"
                         Value="{Binding SubscribedTime}" />
-                </StackPanel>
+            </StackPanel>
 
-                <Separator />
+            <Separator />
 
-                <StackPanel Orientation="Vertical">
-                    <TextBlock Text="Subscriber luck" />
-                    <Slider
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="Subscriber luck" />
+                <Slider
                         Maximum="10"
                         Minimum="0"
                         Ticks="0,1,2,3,4,5,6,7,8,9,10"
                         Value="{Binding SubscriberLuck}" />
-                </StackPanel>
+            </StackPanel>
 
-                <Separator />
+            <Separator />
 
-                <StackPanel>
-                    <TextBox
+            <StackPanel>
+                <TextBox
                         controls:TextBoxHelper.AutoWatermark="True"
                         controls:TextBoxHelper.Watermark="naughty,words,like,this"
                         DockPanel.Dock="Top"
                         Text="{Binding ForbiddenWords}" />
-                </StackPanel>
             </StackPanel>
-        </Grid>
+        </StackPanel>
+    </Grid>
     </Grid>
 </controls:MetroContentControl>

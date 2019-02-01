@@ -31,7 +31,9 @@ namespace Aiva.Gui.Views.Windows {
                 => this.Close();
 
             this.DataContext = _vm;
+        }
 
+        private void MetroWindow_Loaded(object sender, RoutedEventArgs e) {
             MessageBox.Show("Login in Twitch with your Botaccount");
         }
     }
