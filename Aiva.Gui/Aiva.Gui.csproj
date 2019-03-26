@@ -6,9 +6,6 @@
         <UseWPF>true</UseWPF>
         <AssemblyName>Aiva.Gui</AssemblyName>
         <RootNamespace>Aiva.Gui</RootNamespace>
-		<RuntimeIdentifiers>
-		<RuntimeIdentifiers>win10-x64</RuntimeIdentifiers>
-	</RuntimeIdentifiers>
 		<ApplicationIcon>Icon.ico</ApplicationIcon>
 		<StartupObject />
     </PropertyGroup>
