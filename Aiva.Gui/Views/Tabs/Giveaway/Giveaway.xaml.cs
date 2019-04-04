@@ -12,12 +12,12 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Aiva.Gui.Views.Tabs {
+namespace Aiva.Gui.Views.Tabs.Giveaway {
     /// <summary>
     /// Interaktionslogik für Giveaway.xaml
     /// </summary>
-    public partial class Giveaway : MetroContentControl {
-        public Giveaway() {
+    public partial class MainVM : MetroContentControl {
+        public MainVM() {
             InitializeComponent();
             this.DataContext = new ViewModels.Tabs.GiveawayViewModel();
         }

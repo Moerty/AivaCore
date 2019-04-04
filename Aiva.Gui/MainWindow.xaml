@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:giveaway="clr-namespace:Aiva.Gui.Views.Tabs.Giveaway"
     xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
     xmlns:local="clr-namespace:Aiva.Gui"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -79,7 +80,7 @@
 
                     <controls:HamburgerMenuIconItem Icon="{iconPacks:Material Kind=Gift}" Label="Giveaway">
                         <controls:HamburgerMenuIconItem.Tag>
-                            <views:Giveaway />
+                            <giveaway:MainVM />
                         </controls:HamburgerMenuIconItem.Tag>
                     </controls:HamburgerMenuIconItem>
 
