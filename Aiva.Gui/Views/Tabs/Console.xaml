@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:clr="clr-namespace:System;assembly=mscorlib"
+    xmlns:clr1="clr-namespace:System;assembly=System.Runtime"
     xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:converters="clr-namespace:Aiva.Gui.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -20,7 +21,7 @@
             IsLiveGroupingRequested="True"
             Source="{Binding User}">
             <CollectionViewSource.LiveGroupingProperties>
-                <clr:String>UserType</clr:String>
+                <clr1:String>UserType</clr1:String>
             </CollectionViewSource.LiveGroupingProperties>
             <CollectionViewSource.GroupDescriptions>
                 <PropertyGroupDescription PropertyName="UserType" />
@@ -33,7 +34,10 @@
             <ColumnDefinition Width="30*" />
         </Grid.ColumnDefinitions>
 
-        <ItemsControl ItemsSource="{Binding Message}">
+        <ItemsControl
+            BorderBrush="Black"
+            BorderThickness="1"
+            ItemsSource="{Binding Message}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -88,6 +92,8 @@
         <ListView
             Name="lvUsers"
             Grid.Column="1"
+            BorderBrush="Black"
+            BorderThickness="1"
             ItemsSource="{Binding Source={StaticResource cvsViewers}}">
             <ListView.ItemTemplate>
                 <DataTemplate>
